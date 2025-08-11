@@ -125,6 +125,20 @@
       "traits": ["Versatile", "Adaptive", "Balanced", "Integrative"]
     }
   },
+  "resultsDisplay": {
+    "backgroundImage": {
+      "enabled": true,
+      "url": "/images/assessment-background.png",
+      "opacity": 0.3,
+      "position": "center",
+      "size": "cover"
+    },
+    "plotSettings": {
+      "showGrid": true,
+      "gridColor": "#e5e7eb",
+      "borderColor": "#9ca3af"
+    }
+  },
   "uiText": {
     "homePage": {
       "title": "Kinetic Style Assessment",

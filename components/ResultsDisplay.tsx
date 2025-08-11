@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { AssessmentScore, interpretCoordinates } from '@/lib/scoringEngine'
-import { loadPhraseConfig, getUIText, getStyleQuadrants } from '@/config/assessmentConfig'
+import { loadPhraseConfig, getUIText, getResultsDisplayConfig } from '@/config/assessmentConfig'
 
 interface ResultsDisplayProps {
   scores: AssessmentScore
@@ -12,6 +12,7 @@ interface ResultsDisplayProps {
 export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayProps) {
   const [interpretation, setInterpretation] = useState<any>(null)
   const [uiText, setUIText] = useState<any>(null)
+  const [displayConfig, setDisplayConfig] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -19,10 +20,12 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
       try {
         const config = await loadPhraseConfig()
         const ui = getUIText(config)
+        const display = getResultsDisplayConfig(config)
         const result = await interpretCoordinates(scores.coordinates)
         
         setInterpretation(result)
         setUIText(ui)
+        setDisplayConfig(display)
       } catch (error) {
         console.error('Error loading results:', error)
       } finally {
@@ -33,7 +36,7 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
     loadResults()
   }, [scores])
 
-  if (loading || !interpretation || !uiText) {
+  if (loading || !interpretation || !uiText || !displayConfig) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-lg text-gray-600">Loading your results...</div>
@@ -71,12 +74,46 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
             <div className="relative mx-auto" style={{ width: '420px', height: '420px' }}>
               {/* Plot background */}
               <div 
-                className="absolute border-2 border-gray-300 bg-gray-50"
-                style={{ width: '400px', height: '400px', left: '10px', top: '10px' }}
+                className="absolute border-2 bg-gray-50 overflow-hidden"
+                style={{ 
+                  width: '400px', 
+                  height: '400px', 
+                  left: '10px', 
+                  top: '10px',
+                  borderColor: displayConfig.plotSettings.borderColor,
+                  backgroundImage: displayConfig.backgroundImage.enabled ? `url(${displayConfig.backgroundImage.url})` : 'none',
+                  backgroundSize: displayConfig.backgroundImage.size,
+                  backgroundPosition: displayConfig.backgroundImage.position,
+                  backgroundRepeat: 'no-repeat'
+                }}
               >
+                {/* Background overlay for opacity control */}
+                {displayConfig.backgroundImage.enabled && (
+                  <div 
+                    className="absolute inset-0 bg-white"
+                    style={{ opacity: 1 - displayConfig.backgroundImage.opacity }}
+                  ></div>
+                )}
+                
                 {/* Quadrant lines */}
-                <div className="absolute w-full h-0.5 bg-gray-400" style={{ top: '50%' }}></div>
-                <div className="absolute h-full w-0.5 bg-gray-400" style={{ left: '50%' }}></div>
+                {displayConfig.plotSettings.showGrid && (
+                  <>
+                    <div 
+                      className="absolute w-full h-0.5" 
+                      style={{ 
+                        top: '50%', 
+                        backgroundColor: displayConfig.plotSettings.gridColor 
+                      }}
+                    ></div>
+                    <div 
+                      className="absolute h-full w-0.5" 
+                      style={{ 
+                        left: '50%', 
+                        backgroundColor: displayConfig.plotSettings.gridColor 
+                      }}
+                    ></div>
+                  </>
+                )}
                 
                 {/* Quadrant labels */}
                 <div className="absolute text-xs text-gray-600 font-medium" style={{ top: '10px', left: '10px' }}>

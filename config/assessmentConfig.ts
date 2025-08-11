@@ -54,6 +54,21 @@ export interface UIText {
   }
 }
 
+export interface ResultsDisplayConfig {
+  backgroundImage: {
+    enabled: boolean
+    url: string
+    opacity: number
+    position: string
+    size: string
+  }
+  plotSettings: {
+    showGrid: boolean
+    gridColor: string
+    borderColor: string
+  }
+}
+
 export interface AssessmentConfig {
   dimensions?: Dimension[]
   phraseSets: PhraseSet[]
@@ -76,6 +91,7 @@ export interface AssessmentConfig {
     borderEast: StyleDefinition
     center: StyleDefinition
   }
+  resultsDisplay?: ResultsDisplayConfig
   uiText?: UIText
   metadata: {
     version: string
@@ -303,6 +319,24 @@ export function getStyleDefinitions(config: AssessmentConfig): Required<Assessme
       description: "Exceptional balance across all working styles",
       coordinates: { x: "neutral", y: "neutral" },
       traits: ["Versatile", "Adaptive", "Balanced", "Integrative"]
+    }
+  }
+}
+
+// Get results display settings from config or use defaults
+export function getResultsDisplayConfig(config: AssessmentConfig): ResultsDisplayConfig {
+  return config.resultsDisplay || {
+    backgroundImage: {
+      enabled: false,
+      url: "",
+      opacity: 0.3,
+      position: "center",
+      size: "cover"
+    },
+    plotSettings: {
+      showGrid: true,
+      gridColor: "#e5e7eb",
+      borderColor: "#9ca3af"
     }
   }
 }
