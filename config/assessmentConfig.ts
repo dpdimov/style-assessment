@@ -169,7 +169,8 @@ export function getAssessmentSettings(config: AssessmentConfig): Required<Assess
     minQuestionCount: config.assessmentSettings?.minQuestionCount || 1,
     maxQuestionCount: config.assessmentSettings?.maxQuestionCount || 20,
     allowDuplicatePhrases: config.assessmentSettings?.allowDuplicatePhrases || DEFAULT_SETTINGS.allowDuplicatePhrases,
-    pairingStrategy: config.assessmentSettings?.pairingStrategy || DEFAULT_SETTINGS.pairingStrategy
+    pairingStrategy: config.assessmentSettings?.pairingStrategy || DEFAULT_SETTINGS.pairingStrategy,
+    ensureEqualDimensionCoverage: config.assessmentSettings?.ensureEqualDimensionCoverage || false
   }
 }
 
