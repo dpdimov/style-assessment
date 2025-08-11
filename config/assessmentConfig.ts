@@ -179,12 +179,12 @@ export function getMaxPossibleQuestions(config: AssessmentConfig): number {
   const totalPhrases = flattenPhrases(config).length
   const settings = getAssessmentSettings(config)
   
-  if (settings.allowDuplicatePhrases) {
+  if (settings?.allowDuplicatePhrases) {
     // With duplicates allowed, we can generate many more combinations
     return Math.min(settings.maxQuestionCount, totalPhrases * (totalPhrases - 1) / 2)
   } else {
     // Without duplicates, limited by phrase pairs
-    return Math.min(settings.maxQuestionCount, Math.floor(totalPhrases / 2))
+    return Math.min(settings?.maxQuestionCount || 20, Math.floor(totalPhrases / 2))
   }
 }
 
@@ -193,7 +193,7 @@ export function getRecommendedQuestionCount(config: AssessmentConfig): number {
   const maxPossible = getMaxPossibleQuestions(config)
   const settings = getAssessmentSettings(config)
   
-  return Math.min(settings.defaultQuestionCount, maxPossible)
+  return Math.min(settings?.defaultQuestionCount || 5, maxPossible)
 }
 
 // Get UI text from config or use defaults
