@@ -1,0 +1,148 @@
+{
+  "dimensions": [
+    {
+      "name": "Decision Making Style",
+      "description": "How you approach making decisions and solving problems",
+      "categories": ["Structured Planning", "Adaptive Flexibility"]
+    },
+    {
+      "name": "Work Interaction Style", 
+      "description": "How you prefer to work with others and handle leadership",
+      "categories": ["Individual Leadership", "Collaborative Teamwork"]
+    }
+  ],
+  "phraseSets": [
+    {
+      "category": "Structured Planning",
+      "dimension": "Decision Making Style",
+      "phrases": [
+        "I prefer detailed plans and schedules",
+        "I like structured approaches to tasks",
+        "I value predictable routines and processes",
+        "I work best with clear procedures",
+        "I plan thoroughly before taking action",
+        "I prefer systematic step-by-step methods"
+      ]
+    },
+    {
+      "category": "Adaptive Flexibility",
+      "dimension": "Decision Making Style", 
+      "phrases": [
+        "I prefer flexibility and spontaneity",
+        "I adapt quickly as situations change",
+        "I embrace unexpected developments",
+        "I work well with ambiguous situations",
+        "I adjust my approach based on circumstances",
+        "I thrive when improvising solutions"
+      ]
+    },
+    {
+      "category": "Individual Leadership",
+      "dimension": "Work Interaction Style",
+      "phrases": [
+        "I like to take charge in group situations",
+        "I naturally assume leadership roles",
+        "I make decisions independently",
+        "I prefer to work autonomously",
+        "I take initiative without being asked",
+        "I guide others toward solutions"
+      ]
+    },
+    {
+      "category": "Collaborative Teamwork", 
+      "dimension": "Work Interaction Style",
+      "phrases": [
+        "I prefer collaborative decision-making",
+        "I value consensus building in teams",
+        "I seek input from others before deciding",
+        "I thrive in team environments",
+        "I enjoy group problem-solving",
+        "I build on others' ideas effectively"
+      ]
+    }
+  ],
+  "assessmentSettings": {
+    "defaultQuestionCount": 12,
+    "minQuestionCount": 8,
+    "maxQuestionCount": 12,
+    "allowDuplicatePhrases": false,
+    "pairingStrategy": "dimension-focused",
+    "ensureEqualDimensionCoverage": true
+  },
+  "styleQuadrants": {
+    "quadrant1": {
+      "name": "Adaptive Collaborator",
+      "description": "Flexible approach with collaborative teamwork",
+      "coordinates": { "x": "positive", "y": "positive" },
+      "traits": ["Flexible", "Collaborative", "Responsive", "Team-oriented"]
+    },
+    "quadrant2": {
+      "name": "Structured Collaborator",
+      "description": "Planned approach with collaborative teamwork", 
+      "coordinates": { "x": "negative", "y": "positive" },
+      "traits": ["Organized", "Collaborative", "Methodical", "Team-oriented"]
+    },
+    "quadrant3": {
+      "name": "Structured Leader",
+      "description": "Planned approach with individual leadership",
+      "coordinates": { "x": "negative", "y": "negative" },
+      "traits": ["Organized", "Independent", "Methodical", "Self-directed"]
+    },
+    "quadrant4": {
+      "name": "Adaptive Leader", 
+      "description": "Flexible approach with individual leadership",
+      "coordinates": { "x": "positive", "y": "negative" },
+      "traits": ["Flexible", "Independent", "Responsive", "Self-directed"]
+    }
+  },
+  "uiText": {
+    "homePage": {
+      "title": "Kinetic Style Assessment",
+      "subtitle": "Discover your working style and behavioral preferences through our comprehensive assessment tool.",
+      "whatYoullLearn": {
+        "heading": "What You'll Learn:",
+        "items": [
+          "Your preferred working style",
+          "Communication preferences", 
+          "Decision-making approach",
+          "Team collaboration style"
+        ]
+      },
+      "assessmentDetails": {
+        "heading": "Assessment Details:",
+        "items": [
+          "Takes 5-10 minutes to complete",
+          "12 randomized question pairs",
+          "Instant results and insights",
+          "Downloadable PDF report"
+        ]
+      },
+      "buttons": {
+        "startAssessment": "Start Assessment",
+        "processing": "Processing...",
+        "viewResults": "View Your Results"
+      },
+      "footer": "Your privacy is important to us. All assessment data is securely processed and stored."
+    },
+    "assessment": {
+      "title": "Kinetic Style Assessment",
+      "partIntros": {
+        "part1": "For each pair below, select the statement that better describes your approach to making decisions and solving problems.",
+        "part2": "For each pair below, select the statement that better describes how you prefer to work with others and handle leadership."
+      },
+      "instructions": "Use the slider or click the bars above to select your response"
+    },
+    "auth": {
+      "welcomeBack": "Welcome back,",
+      "logout": "Logout"
+    }
+  },
+  "metadata": {
+    "version": "2.0.0",
+    "lastUpdated": "2024-01-01",
+    "totalPhrases": 24,
+    "categories": 4,
+    "dimensions": 2,
+    "description": "Two-dimensional kinetic style assessment with 4 focused categories"
+  }
+}

@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+/* Original slider styling */
+.colums-wrapper {
+  position: relative;
+  width: 346px;
+  overflow: hidden;
+  height: 100px;
+  margin-bottom: 20px;
+  margin: 0 auto;
+}
+
+.column {
+  width: 20px;
+  background: rgba(193, 214, 69, 0.4);
+  position: absolute;
+  left: auto;
+  bottom: 0;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
+  transition: background 0.3s ease;
+}
+
+.column:nth-child(1) { left: 0px; height: 100px; }
+.column:nth-child(2) { left: 32px; height: 80px; }
+.column:nth-child(3) { left: 66px; height: 60px; }
+.column:nth-child(4) { left: 97px; height: 40px; }
+.column:nth-child(5) { left: 130px; height: 20px; }
+.column:nth-child(6) { left: 196px; height: 20px; }
+.column:nth-child(7) { left: 229px; height: 40px; }
+.column:nth-child(8) { left: 261px; height: 60px; }
+.column:nth-child(9) { left: 294px; height: 80px; }
+.column:nth-child(10) { left: 326px; height: 100px; }
+
+.column.active {
+  background: #C1D645;
+}
+
+/* Range slider styling */
+.range-wrapper {
+  width: 346px;
+  margin: 0 auto;
+}
+
+input[type=range].range {
+  -webkit-appearance: none;
+  margin: 6px 0;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 100;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  background: #D1D8E5;
+  border: 0px solid rgba(0, 0, 1, 0);
+}
+
+input[type=range]::-webkit-slider-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50px;
+  background: #BDBDBD;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -10px;
+  transition: 0.3s;
+  position: relative;
+}
+
+input[type=range].active::-webkit-slider-thumb {
+  background: #fff;
+  border: 1px solid #BDBDBD;
+  margin-top: -10px;
+  height: 20px;
+  width: 20px;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  background: #D1D8E5;
+  border-radius: 13.2px;
+  border: 0px solid rgba(0, 0, 1, 0);
+}
+
+input[type=range]::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50px;
+  background: #BDBDBD;
+  cursor: pointer;
+  border: none;
+}
+
+.range-submit {
+  opacity: 0.5;
+  pointer-events: none;
+  transition: all 0.3s;
+  cursor: pointer;
+  padding: 4px 24px;
+  background: #F49611;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+}
+
+.range-submit.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.range-submit:hover.active {
+  background: #e5870f;
+}
+
+/* Phrase styling */
+.phrase-container {
+  position: relative;
+  width: 346px;
+  margin: 0 auto;
+}
+
+.phrase {
+  width: 130px;
+  text-align: center;
+  padding: 10px 5px;
+  color: #000;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  position: absolute;
+  top: -40px;
+}
+
+.phrase.left {
+  left: -55px;
+}
+
+.phrase.right {
+  right: -55px;
+}
+
+/* Mobile responsive */
+@media (max-width: 720px) {
+  .colums-wrapper {
+    width: 230px;
+  }
+  
+  .range-wrapper {
+    width: 230px;
+  }
+  
+  .phrase-container {
+    width: 230px;
+  }
+  
+  .phrase {
+    width: 110px;
+    font-size: 12px;
+    line-height: 15px;
+    padding: 8px 3px;
+    top: -40px;
+  }
+  
+  .phrase.left {
+    left: -16px;
+  }
+  
+  .phrase.right {
+    right: -16px;
+  }
+  
+  .column {
+    width: 14px;
+  }
+  
+  .column:nth-child(1) { left: 0px; }
+  .column:nth-child(2) { left: 22px; }
+  .column:nth-child(3) { left: 43px; }
+  .column:nth-child(4) { left: 65px; }
+  .column:nth-child(5) { left: 86px; }
+  .column:nth-child(6) { left: 130px; }
+  .column:nth-child(7) { left: 151px; }
+  .column:nth-child(8) { left: 173px; }
+  .column:nth-child(9) { left: 194px; }
+  .column:nth-child(10) { left: 216px; }
+  
+  input[type=range]::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+  }
+  
+  input[type=range]::-webkit-slider-thumb {
+    height: 14px;
+    width: 14px;
+  }
+}
