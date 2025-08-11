@@ -331,11 +331,11 @@ export async function interpretCoordinates(coordinates: { x: number; y: number }
   
   // Get style info from configuration, with fallbacks
   const styleQuadrants = getStyleQuadrants(config)
-  const quadrantInfo = styleQuadrants[quadrantKey as keyof typeof styleQuadrants]
+  const quadrantInfo = styleQuadrants?.[quadrantKey as keyof typeof styleQuadrants]
   
-  const style = quadrantInfo.name
-  const description = quadrantInfo.description
-  const traits = quadrantInfo.traits
+  const style = quadrantInfo?.name || `Quadrant ${quadrant} Style`
+  const description = quadrantInfo?.description || `Style in quadrant ${quadrant}`
+  const traits = quadrantInfo?.traits || []
   
   return { quadrant, style, description, traits }
 }
