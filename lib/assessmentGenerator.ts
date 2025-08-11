@@ -48,9 +48,9 @@ export async function generateAssessmentQuestions(numQuestions?: number): Promis
   // Use provided number or get recommended count from config
   const questionCount = numQuestions ?? getRecommendedQuestionCount(configCache)
   
-  console.log(`Generating ${questionCount} questions using ${settings.pairingStrategy} strategy`)
+  console.log(`Generating ${questionCount} questions using ${settings?.pairingStrategy || 'random'} strategy`)
   
-  if (settings.pairingStrategy === 'dimension-focused') {
+  if (settings?.pairingStrategy === 'dimension-focused') {
     return generateDimensionFocusedQuestions(questionCount)
   } else {
     return generateRandomQuestions(questionCount)
@@ -75,7 +75,7 @@ async function generateDimensionFocusedQuestions(questionCount: number): Promise
   })
   
   // If we have dimensions defined, create phase-based questions
-  if (configCache.dimensions && settings.ensureEqualDimensionCoverage) {
+  if (configCache.dimensions && settings?.ensureEqualDimensionCoverage) {
     const questionsPerDimension = Math.floor(questionCount / configCache.dimensions.length)
     
     // Generate questions for each dimension in order (for phases)
