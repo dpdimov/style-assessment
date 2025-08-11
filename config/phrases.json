@@ -69,30 +69,60 @@
     "pairingStrategy": "dimension-focused",
     "ensureEqualDimensionCoverage": true
   },
-  "styleQuadrants": {
+  "styleDefinitions": {
     "quadrant1": {
       "name": "Adaptive Collaborator",
-      "description": "Flexible approach with collaborative teamwork",
+      "description": "You have a flexible approach with strong collaborative teamwork skills. You thrive in dynamic environments and excel at bringing people together to achieve common goals.",
       "coordinates": { "x": "positive", "y": "positive" },
       "traits": ["Flexible", "Collaborative", "Responsive", "Team-oriented"]
     },
     "quadrant2": {
       "name": "Structured Collaborator",
-      "description": "Planned approach with collaborative teamwork", 
+      "description": "You combine careful planning with collaborative teamwork. You excel at organizing group efforts and ensuring everyone is aligned with clear processes and goals.", 
       "coordinates": { "x": "negative", "y": "positive" },
       "traits": ["Organized", "Collaborative", "Methodical", "Team-oriented"]
     },
     "quadrant3": {
       "name": "Structured Leader",
-      "description": "Planned approach with individual leadership",
+      "description": "You prefer planned approaches with individual leadership. You excel at creating clear strategies, making decisive choices, and driving results through systematic execution.",
       "coordinates": { "x": "negative", "y": "negative" },
       "traits": ["Organized", "Independent", "Methodical", "Self-directed"]
     },
     "quadrant4": {
       "name": "Adaptive Leader", 
-      "description": "Flexible approach with individual leadership",
+      "description": "You combine flexible approaches with individual leadership. You excel at navigating uncertainty, making quick decisions, and inspiring others through dynamic problem-solving.",
       "coordinates": { "x": "positive", "y": "negative" },
       "traits": ["Flexible", "Independent", "Responsive", "Self-directed"]
+    },
+    "borderNorth": {
+      "name": "Collaborative Bridge-Builder",
+      "description": "You balance structured and adaptive approaches while maintaining a strong collaborative focus. You excel at building consensus between different working styles and facilitating team harmony.",
+      "coordinates": { "x": "neutral", "y": "positive" },
+      "traits": ["Diplomatic", "Collaborative", "Balanced", "Harmonizing"]
+    },
+    "borderSouth": {
+      "name": "Independent Strategist",
+      "description": "You balance structured and adaptive approaches with a preference for individual leadership. You excel at developing flexible strategies and executing them with personal accountability.",
+      "coordinates": { "x": "neutral", "y": "negative" },
+      "traits": ["Strategic", "Independent", "Balanced", "Accountable"]
+    },
+    "borderWest": {
+      "name": "Systematic Facilitator",
+      "description": "You prefer structured approaches while balancing individual and collaborative tendencies. You excel at creating organized frameworks that work for both teams and independent contributors.",
+      "coordinates": { "x": "negative", "y": "neutral" },
+      "traits": ["Organized", "Balanced", "Systematic", "Facilitating"]
+    },
+    "borderEast": {
+      "name": "Agile Catalyst",
+      "description": "You prefer adaptive approaches while balancing individual and collaborative tendencies. You excel at energizing both team efforts and independent initiatives through flexible, responsive leadership.",
+      "coordinates": { "x": "positive", "y": "neutral" },
+      "traits": ["Adaptive", "Balanced", "Energizing", "Catalytic"]
+    },
+    "center": {
+      "name": "Dynamic Integrator",
+      "description": "You demonstrate exceptional balance across all working styles. You excel at adapting your approach based on situational needs, seamlessly switching between structure and flexibility, individual and collaborative modes.",
+      "coordinates": { "x": "neutral", "y": "neutral" },
+      "traits": ["Versatile", "Adaptive", "Balanced", "Integrative"]
     }
   },
   "uiText": {

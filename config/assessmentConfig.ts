@@ -11,12 +11,12 @@ export interface PhraseSet {
   phrases: string[]
 }
 
-export interface StyleQuadrant {
+export interface StyleDefinition {
   name: string
   description: string
   coordinates: {
-    x: 'positive' | 'negative'
-    y: 'positive' | 'negative'
+    x: 'positive' | 'negative' | 'neutral'
+    y: 'positive' | 'negative' | 'neutral'
   }
   traits: string[]
 }
@@ -65,11 +65,16 @@ export interface AssessmentConfig {
     pairingStrategy: 'random' | 'category-mixed' | 'category-exclusive' | 'dimension-focused'
     ensureEqualDimensionCoverage?: boolean
   }
-  styleQuadrants?: {
-    quadrant1: StyleQuadrant
-    quadrant2: StyleQuadrant  
-    quadrant3: StyleQuadrant
-    quadrant4: StyleQuadrant
+  styleDefinitions?: {
+    quadrant1: StyleDefinition
+    quadrant2: StyleDefinition  
+    quadrant3: StyleDefinition
+    quadrant4: StyleDefinition
+    borderNorth: StyleDefinition
+    borderSouth: StyleDefinition
+    borderWest: StyleDefinition
+    borderEast: StyleDefinition
+    center: StyleDefinition
   }
   uiText?: UIText
   metadata: {
@@ -242,9 +247,9 @@ export function getUIText(config: AssessmentConfig): UIText {
   }
 }
 
-// Get style quadrants from config or use defaults
-export function getStyleQuadrants(config: AssessmentConfig): Required<AssessmentConfig['styleQuadrants']> {
-  return config.styleQuadrants || {
+// Get style definitions from config or use defaults  
+export function getStyleDefinitions(config: AssessmentConfig): Required<AssessmentConfig['styleDefinitions']> {
+  return config.styleDefinitions || {
     quadrant1: {
       name: "Adaptive Collaborator",
       description: "Flexible approach with collaborative teamwork",
@@ -268,6 +273,36 @@ export function getStyleQuadrants(config: AssessmentConfig): Required<Assessment
       description: "Flexible approach with individual leadership", 
       coordinates: { x: "positive", y: "negative" },
       traits: ["Flexible", "Independent", "Responsive", "Self-directed"]
+    },
+    borderNorth: {
+      name: "Collaborative Bridge-Builder",
+      description: "Balance between structured and adaptive with collaborative focus",
+      coordinates: { x: "neutral", y: "positive" },
+      traits: ["Diplomatic", "Collaborative", "Balanced", "Harmonizing"]
+    },
+    borderSouth: {
+      name: "Independent Strategist",
+      description: "Balance between structured and adaptive with independent focus",
+      coordinates: { x: "neutral", y: "negative" },
+      traits: ["Strategic", "Independent", "Balanced", "Accountable"]
+    },
+    borderWest: {
+      name: "Systematic Facilitator",
+      description: "Structured approach with balanced individual/collaborative style",
+      coordinates: { x: "negative", y: "neutral" },
+      traits: ["Organized", "Balanced", "Systematic", "Facilitating"]
+    },
+    borderEast: {
+      name: "Agile Catalyst",
+      description: "Adaptive approach with balanced individual/collaborative style",
+      coordinates: { x: "positive", y: "neutral" },
+      traits: ["Adaptive", "Balanced", "Energizing", "Catalytic"]
+    },
+    center: {
+      name: "Dynamic Integrator",
+      description: "Exceptional balance across all working styles",
+      coordinates: { x: "neutral", y: "neutral" },
+      traits: ["Versatile", "Adaptive", "Balanced", "Integrative"]
     }
   }
 }

@@ -1,4 +1,4 @@
-import { AssessmentConfig, loadPhraseConfig, getStyleQuadrants } from '@/config/assessmentConfig'
+import { AssessmentConfig, loadPhraseConfig, getStyleDefinitions } from '@/config/assessmentConfig'
 import { GeneratedQuestion } from './assessmentGenerator'
 
 export interface CategoryScore {
@@ -302,9 +302,9 @@ export function interpretDimensionScore(dimensionScore: DimensionScore): {
   return { primary, intensity, description }
 }
 
-// Interpret coordinates as quadrant and style
+// Interpret coordinates as style (9 possible positions)
 export async function interpretCoordinates(coordinates: { x: number; y: number }): Promise<{
-  quadrant: number
+  position: string
   style: string
   description: string
   traits: string[]
@@ -312,30 +312,53 @@ export async function interpretCoordinates(coordinates: { x: number; y: number }
   const config = await loadPhraseConfig()
   const { x, y } = coordinates
   
-  let quadrant: number
-  let quadrantKey: string
+  // Define thresholds for neutral zones (adjust as needed)
+  const neutralThreshold = 0.2
   
-  if (x >= 0 && y >= 0) {
-    quadrant = 1
-    quadrantKey = 'quadrant1'
-  } else if (x < 0 && y >= 0) {
-    quadrant = 2
-    quadrantKey = 'quadrant2'
-  } else if (x < 0 && y < 0) {
-    quadrant = 3
-    quadrantKey = 'quadrant3'
-  } else {
-    quadrant = 4
-    quadrantKey = 'quadrant4'
+  let position: string
+  let styleKey: string
+  
+  // Determine if coordinates are neutral, positive, or negative
+  const xCategory = Math.abs(x) <= neutralThreshold ? 'neutral' : x > 0 ? 'positive' : 'negative'
+  const yCategory = Math.abs(y) <= neutralThreshold ? 'neutral' : y > 0 ? 'positive' : 'negative'
+  
+  // Map to the 9 possible positions
+  if (xCategory === 'neutral' && yCategory === 'neutral') {
+    position = 'center'
+    styleKey = 'center'
+  } else if (xCategory === 'neutral' && yCategory === 'positive') {
+    position = 'borderNorth'
+    styleKey = 'borderNorth'
+  } else if (xCategory === 'neutral' && yCategory === 'negative') {
+    position = 'borderSouth'
+    styleKey = 'borderSouth'
+  } else if (xCategory === 'negative' && yCategory === 'neutral') {
+    position = 'borderWest'
+    styleKey = 'borderWest'
+  } else if (xCategory === 'positive' && yCategory === 'neutral') {
+    position = 'borderEast'
+    styleKey = 'borderEast'
+  } else if (xCategory === 'positive' && yCategory === 'positive') {
+    position = 'quadrant1'
+    styleKey = 'quadrant1'
+  } else if (xCategory === 'negative' && yCategory === 'positive') {
+    position = 'quadrant2'
+    styleKey = 'quadrant2'
+  } else if (xCategory === 'negative' && yCategory === 'negative') {
+    position = 'quadrant3'
+    styleKey = 'quadrant3'
+  } else { // xCategory === 'positive' && yCategory === 'negative'
+    position = 'quadrant4'
+    styleKey = 'quadrant4'
   }
   
   // Get style info from configuration, with fallbacks
-  const styleQuadrants = getStyleQuadrants(config)
-  const quadrantInfo = styleQuadrants?.[quadrantKey as keyof typeof styleQuadrants]
+  const styleDefinitions = getStyleDefinitions(config)
+  const styleInfo = styleDefinitions?.[styleKey as keyof typeof styleDefinitions]
   
-  const style = quadrantInfo?.name || `Quadrant ${quadrant} Style`
-  const description = quadrantInfo?.description || `Style in quadrant ${quadrant}`
-  const traits = quadrantInfo?.traits || []
+  const style = styleInfo?.name || `${position} Style`
+  const description = styleInfo?.description || `Style at position ${position}`
+  const traits = styleInfo?.traits || []
   
-  return { quadrant, style, description, traits }
+  return { position, style, description, traits }
 }
