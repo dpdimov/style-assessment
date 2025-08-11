@@ -91,19 +91,19 @@ export default function ConfigPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
               <div className="text-sm text-gray-500">Default Questions</div>
-              <div className="font-semibold">{getAssessmentSettings(config).defaultQuestionCount}</div>
+              <div className="font-semibold">{config && getAssessmentSettings(config).defaultQuestionCount}</div>
             </div>
             <div>
               <div className="text-sm text-gray-500">Recommended Count</div>
-              <div className="font-semibold">{getRecommendedQuestionCount(config)}</div>
+              <div className="font-semibold">{config && getRecommendedQuestionCount(config)}</div>
             </div>
             <div>
               <div className="text-sm text-gray-500">Max Possible</div>
-              <div className="font-semibold">{getMaxPossibleQuestions(config)}</div>
+              <div className="font-semibold">{config && getMaxPossibleQuestions(config)}</div>
             </div>
             <div>
               <div className="text-sm text-gray-500">Pairing Strategy</div>
-              <div className="font-semibold">{getAssessmentSettings(config).pairingStrategy}</div>
+              <div className="font-semibold">{config && getAssessmentSettings(config).pairingStrategy}</div>
             </div>
           </div>
         </div>
@@ -135,7 +135,7 @@ export default function ConfigPage() {
         <div className="bg-white rounded-lg shadow p-6 mb-6">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Categories Overview</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {getCategories(config).map((category, index) => {
+            {config && getCategories(config).map((category, index) => {
               const phraseSet = config.phraseSets.find(set => set.category === category)
               return (
                 <div key={index} className="border border-gray-200 rounded-lg p-4">
@@ -151,7 +151,7 @@ export default function ConfigPage() {
 
         {/* Phrase Sets */}
         <div className="space-y-6">
-          {config.phraseSets.map((phraseSet, index) => (
+          {config && config.phraseSets.map((phraseSet, index) => (
             <div key={index} className="bg-white rounded-lg shadow p-6">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 {phraseSet.category}
