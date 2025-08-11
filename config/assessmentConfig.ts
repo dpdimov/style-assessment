@@ -117,6 +117,7 @@ function getFallbackConfig(): AssessmentConfig {
     phraseSets: [
       {
         category: "Planning vs Flexibility",
+        dimension: "Decision Making Style",
         phrases: [
           "I prefer detailed plans and schedules",
           "I prefer flexibility and spontaneity",
@@ -125,7 +126,8 @@ function getFallbackConfig(): AssessmentConfig {
         ]
       },
       {
-        category: "Leadership vs Collaboration",
+        category: "Leadership vs Collaboration", 
+        dimension: "Work Interaction Style",
         phrases: [
           "I like to take charge in groups",
           "I prefer collaborative decision-making",
