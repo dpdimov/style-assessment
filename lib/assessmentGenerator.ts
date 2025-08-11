@@ -189,6 +189,18 @@ function generateQuestionsFromPool(phrasePool: string[], numQuestions: number): 
 
 // Generate assessment with seeded randomization (for reproducible tests)
 export function generateSeededAssessment(seed: string, numQuestions: number = 5): GeneratedQuestion[] {
+  // Use phrase cache if available, otherwise fallback phrases
+  const phrasePool = phrasePoolCache || [
+    'I prefer detailed plans',
+    'I prefer flexibility',
+    'I like to lead',
+    'I prefer collaboration',
+    'I focus on facts',
+    'I explore possibilities',
+    'I make logical decisions',
+    'I consider feelings'
+  ]
+  
   // Simple seeded random number generator
   let seedNum = 0
   for (let i = 0; i < seed.length; i++) {
@@ -204,7 +216,7 @@ export function generateSeededAssessment(seed: string, numQuestions: number = 5)
   })(seedNum)
   
   // Shuffle using seeded random
-  const shuffled = [...PHRASE_POOL]
+  const shuffled = [...phrasePool]
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(seededRandom() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
@@ -215,8 +227,8 @@ export function generateSeededAssessment(seed: string, numQuestions: number = 5)
   for (let i = 0; i < numQuestions && i * 2 + 1 < shuffled.length; i++) {
     const phrase1 = shuffled[i * 2]
     const phrase2 = shuffled[i * 2 + 1]
-    const phrase1Index = PHRASE_POOL.indexOf(phrase1)
-    const phrase2Index = PHRASE_POOL.indexOf(phrase2)
+    const phrase1Index = phrasePool.indexOf(phrase1)
+    const phrase2Index = phrasePool.indexOf(phrase2)
     
     // Use seeded random for left/right placement
     const leftFirst = seededRandom() < 0.5
