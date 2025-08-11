@@ -1,12 +1,32 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { loadPhraseConfig, validateConfig, AssessmentConfig, getCategories, getAssessmentSettings, getMaxPossibleQuestions, getRecommendedQuestionCount } from '@/config/assessmentConfig'
 
 export default function ConfigPage() {
   const [config, setConfig] = useState<AssessmentConfig | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [validation, setValidation] = useState<{ isValid: boolean; errors: string[] } | null>(null)
+
+  // Memoized computed values
+  const computedValues = useMemo(() => {
+    if (!config) {
+      return {
+        assessmentSettings: null,
+        recommendedCount: 'N/A',
+        maxPossible: 'N/A',
+        categories: []
+      }
+    }
+
+    const settings = getAssessmentSettings(config)
+    return {
+      assessmentSettings: settings,
+      recommendedCount: getRecommendedQuestionCount(config),
+      maxPossible: getMaxPossibleQuestions(config),
+      categories: getCategories(config)
+    }
+  }, [config])
 
   useEffect(() => {
     loadConfig()
@@ -91,19 +111,19 @@ export default function ConfigPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
               <div className="text-sm text-gray-500">Default Questions</div>
-              <div className="font-semibold">{config ? getAssessmentSettings(config).defaultQuestionCount : 'N/A'}</div>
+              <div className="font-semibold">{computedValues.assessmentSettings?.defaultQuestionCount ?? 'N/A'}</div>
             </div>
             <div>
               <div className="text-sm text-gray-500">Recommended Count</div>
-              <div className="font-semibold">{config ? getRecommendedQuestionCount(config) : 'N/A'}</div>
+              <div className="font-semibold">{computedValues.recommendedCount}</div>
             </div>
             <div>
               <div className="text-sm text-gray-500">Max Possible</div>
-              <div className="font-semibold">{config ? getMaxPossibleQuestions(config) : 'N/A'}</div>
+              <div className="font-semibold">{computedValues.maxPossible}</div>
             </div>
             <div>
               <div className="text-sm text-gray-500">Pairing Strategy</div>
-              <div className="font-semibold">{config ? getAssessmentSettings(config).pairingStrategy : 'N/A'}</div>
+              <div className="font-semibold">{computedValues.assessmentSettings?.pairingStrategy ?? 'N/A'}</div>
             </div>
           </div>
         </div>
@@ -135,8 +155,8 @@ export default function ConfigPage() {
         <div className="bg-white rounded-lg shadow p-6 mb-6">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Categories Overview</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {config ? getCategories(config).map((category, index) => {
-              const phraseSet = config.phraseSets.find(set => set.category === category)
+            {computedValues.categories.map((category, index) => {
+              const phraseSet = config?.phraseSets.find(set => set.category === category)
               return (
                 <div key={index} className="border border-gray-200 rounded-lg p-4">
                   <h3 className="font-semibold text-gray-800 mb-2">{category}</h3>
@@ -145,7 +165,7 @@ export default function ConfigPage() {
                   </div>
                 </div>
               )
-            }) : null}
+            })}
           </div>
         </div>
 
