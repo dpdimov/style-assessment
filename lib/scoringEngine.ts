@@ -313,7 +313,7 @@ export async function interpretCoordinates(coordinates: { x: number; y: number }
   const { x, y } = coordinates
   
   // Define thresholds for neutral zones (adjust as needed)
-  const neutralThreshold = 0.2
+  const neutralThreshold = 0.1
   
   let position: string
   let styleKey: string
