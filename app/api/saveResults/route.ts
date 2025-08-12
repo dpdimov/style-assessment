@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     let processedEmailDomain = body.emailDomain
     if (processedEmailDomain && processedEmailDomain.includes('@')) {
       // Extract domain if full email was provided by mistake
-      processedEmailDomain = extractEmailDomain(processedEmailDomain)
+      processedEmailDomain = extractEmailDomain(processedEmailDomain) || undefined
     }
 
     // Determine style name from coordinates (optional - could be enhanced)
