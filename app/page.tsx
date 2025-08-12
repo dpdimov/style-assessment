@@ -30,6 +30,8 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [assessmentQuestions, setAssessmentQuestions] = useState<AssessmentQuestion[]>([])
   const [uiText, setUIText] = useState<any>(null)
+  const [customCode, setCustomCode] = useState<string>('')
+  const [emailDomain, setEmailDomain] = useState<string>('')
 
   useEffect(() => {
     const authState = getStoredAuth()
@@ -103,6 +105,8 @@ export default function Home() {
         body: JSON.stringify({
           results: assessmentResults,
           scores: scores,
+          customCode: customCode.trim() || null,
+          emailDomain: emailDomain.trim() || null,
           timestamp: new Date().toISOString()
         })
       })
@@ -216,6 +220,42 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Input Fields for Custom Code and Email Domain */}
+          <div className="bg-gray-50 rounded-lg p-6 mb-8">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Optional Information</h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="customCode" className="block text-sm font-medium text-gray-700 mb-2">
+                  Group Code
+                </label>
+                <input
+                  type="text"
+                  id="customCode"
+                  value={customCode}
+                  onChange={(e) => setCustomCode(e.target.value)}
+                  placeholder="Enter group or organization code"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  maxLength={50}
+                />
+                <p className="text-xs text-gray-500 mt-1">For grouping results by organization or study group</p>
+              </div>
+              <div>
+                <label htmlFor="emailDomain" className="block text-sm font-medium text-gray-700 mb-2">
+                  Email Domain (Optional)
+                </label>
+                <input
+                  type="text"
+                  id="emailDomain"
+                  value={emailDomain}
+                  onChange={(e) => setEmailDomain(e.target.value)}
+                  placeholder="e.g., company.com"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                />
+                <p className="text-xs text-gray-500 mt-1">For organizational analytics (domain only, not full email)</p>
               </div>
             </div>
           </div>
