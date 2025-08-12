@@ -38,7 +38,7 @@ export class DatabaseService {
           ${data.user_agent || null}, 
           ${data.ip_address || null}, 
           ${data.style_name || null},
-          ${data.completed_at || new Date()}
+          ${(data.completed_at || new Date()).toISOString()}
         )
         RETURNING id
       `;
