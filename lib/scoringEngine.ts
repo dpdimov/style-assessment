@@ -263,14 +263,14 @@ function calculateCoordinates(
     return { x: 0, y: 0 }
   }
   
-  // Find the two dimensions (should be Decision Making and Work Interaction)
-  const dimension1 = dimensionScores.find(d => d.dimension === "Decision Making Style")
-  const dimension2 = dimensionScores.find(d => d.dimension === "Work Interaction Style")
+  // Find the two dimensions from the actual config
+  const dimension1 = dimensionScores.find(d => d.dimension === "Uncertainty Attitude")
+  const dimension2 = dimensionScores.find(d => d.dimension === "Possibility Attitude")
   
-  // X-axis: Decision Making Style (-1 = Structured Planning, +1 = Adaptive Flexibility)
+  // X-axis: Uncertainty Attitude (-1 = Reason, +1 = Play)
   const x = dimension1?.dimensionBalance || 0
   
-  // Y-axis: Work Interaction Style (-1 = Individual Leadership, +1 = Collaborative Teamwork)  
+  // Y-axis: Possibility Attitude (-1 = Structure, +1 = Openness)  
   const y = dimension2?.dimensionBalance || 0
   
   return { x, y }
