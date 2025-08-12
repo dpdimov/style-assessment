@@ -13,6 +13,7 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
   const [interpretation, setInterpretation] = useState<any>(null)
   const [uiText, setUIText] = useState<any>(null)
   const [displayConfig, setDisplayConfig] = useState<any>(null)
+  const [dimensions, setDimensions] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
         setInterpretation(result)
         setUIText(ui)
         setDisplayConfig(display)
+        setDimensions(config.dimensions || [])
       } catch (error) {
         console.error('Error loading results:', error)
       } finally {
@@ -56,7 +58,7 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Your Assessment Results
+            Your Results
           </h1>
           <p className="text-xl text-gray-600">
             Here's your personalized style profile based on your responses
@@ -67,7 +69,7 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
           {/* Results Plot */}
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-              Your Style Quadrant
+              Visual Summary
             </h2>
             
             {/* Coordinate Plot */}
@@ -115,19 +117,6 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
                   </>
                 )}
                 
-                {/* Quadrant labels */}
-                <div className="absolute text-xs text-gray-600 font-medium" style={{ top: '10px', left: '10px' }}>
-                  Structured<br/>Collaborator
-                </div>
-                <div className="absolute text-xs text-gray-600 font-medium" style={{ top: '10px', right: '10px' }}>
-                  Adaptive<br/>Collaborator
-                </div>
-                <div className="absolute text-xs text-gray-600 font-medium" style={{ bottom: '10px', left: '10px' }}>
-                  Structured<br/>Leader
-                </div>
-                <div className="absolute text-xs text-gray-600 font-medium" style={{ bottom: '10px', right: '10px' }}>
-                  Adaptive<br/>Leader
-                </div>
                 
                 {/* User's position */}
                 <div 
@@ -141,11 +130,11 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
               </div>
               
               {/* Axis labels */}
-              <div className="absolute text-sm text-gray-600 transform -rotate-90" style={{ left: '-50px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)' }}>
-                Individual ← → Collaborative
+              <div className="absolute text-sm text-gray-600 transform -rotate-90" style={{ left: '-70px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)' }}>
+                {dimensions.length >= 2 ? `${dimensions[1].categories[0]} ← → ${dimensions[1].categories[1]}` : 'Individual ← → Collaborative'}
               </div>
-              <div className="absolute text-sm text-gray-600 text-center w-full" style={{ bottom: '-30px' }}>
-                Structured ← → Adaptive
+              <div className="absolute text-sm text-gray-600 text-center w-full" style={{ bottom: '-20px' }}>
+                {dimensions.length >= 1 ? `${dimensions[0].categories[0]} ← → ${dimensions[0].categories[1]}` : 'Structured ← → Adaptive'}
               </div>
             </div>
           </div>
@@ -172,13 +161,6 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
               </div>
             </div>
             
-            <div className="bg-gray-50 rounded-lg p-4 mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Your Coordinates:</h3>
-              <div className="text-sm text-gray-600">
-                <div>Decision Making: <span className="font-medium">{x > 0 ? 'Adaptive' : x < 0 ? 'Structured' : 'Balanced'}</span> ({x.toFixed(2)})</div>
-                <div>Work Interaction: <span className="font-medium">{y > 0 ? 'Collaborative' : y < 0 ? 'Individual' : 'Balanced'}</span> ({y.toFixed(2)})</div>
-              </div>
-            </div>
             
             <button
               onClick={onReturnHome}
