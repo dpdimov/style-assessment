@@ -5,7 +5,7 @@ import AssessmentSlider from './AssessmentSlider'
 
 import { GeneratedQuestion } from '@/lib/assessmentGenerator'
 import { calculateAssessmentScores, AssessmentScore } from '@/lib/scoringEngine'
-import { loadPhraseConfig, getUIText } from '@/config/assessmentConfig'
+import { loadPhraseConfig, getUIText, AssessmentConfig } from '@/config/assessmentConfig'
 
 interface AssessmentQuestion extends GeneratedQuestion {}
 
@@ -18,20 +18,20 @@ interface AssessmentResult {
 
 interface AssessmentProps {
   questions: AssessmentQuestion[]
+  config: AssessmentConfig
   onComplete: (results: AssessmentResult[], scores: AssessmentScore) => void
 }
 
-export default function Assessment({ questions, onComplete }: AssessmentProps) {
+export default function Assessment({ questions, config, onComplete }: AssessmentProps) {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0)
   const [results, setResults] = useState<AssessmentResult[]>([])
   const [currentPhase, setCurrentPhase] = useState<number>(1)
   const [uiText, setUIText] = useState<any>(null)
   
   useEffect(() => {
-    loadPhraseConfig().then(config => {
-      setUIText(getUIText(config))
-    })
-  }, [])
+    // Use the provided configuration for UI text
+    setUIText(getUIText(config))
+  }, [config])
   
   // Split questions into two phases based on dimensions
   const questionsPerPhase = Math.ceil(questions.length / 2)
@@ -79,7 +79,7 @@ export default function Assessment({ questions, onComplete }: AssessmentProps) {
     } else {
       // Assessment complete - calculate scores
       try {
-        const assessmentScores = await calculateAssessmentScores(questions, newResults)
+        const assessmentScores = await calculateAssessmentScores(questions, newResults, config)
         onComplete(newResults, assessmentScores)
       } catch (error) {
         console.error('Error calculating scores:', error)

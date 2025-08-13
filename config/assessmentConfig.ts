@@ -70,6 +70,9 @@ export interface ResultsDisplayConfig {
 }
 
 export interface AssessmentConfig {
+  id: string
+  name: string
+  shortDescription: string
   dimensions?: Dimension[]
   phraseSets: PhraseSet[]
   assessmentSettings?: {
@@ -103,6 +106,25 @@ export interface AssessmentConfig {
   }
 }
 
+export interface AssessmentRegistry {
+  assessments: {
+    id: string
+    name: string
+    shortDescription: string
+    version: string
+    isActive: boolean
+    configFile: string
+    estimatedTime: string
+    questionCount: number
+  }[]
+  defaultAssessment: string
+  metadata: {
+    lastUpdated: string
+    totalAssessments: number
+    version: string
+  }
+}
+
 export interface AssessmentSettings {
   defaultQuestionCount: number
   allowDuplicatePhrases: boolean
@@ -120,21 +142,71 @@ export const DEFAULT_SETTINGS: AssessmentSettings = {
   pairingStrategy: 'random'
 }
 
-// Load configuration from JSON file
-export async function loadPhraseConfig(): Promise<AssessmentConfig> {
+// Load assessment registry
+export async function loadAssessmentRegistry(): Promise<AssessmentRegistry> {
   try {
-    const configModule = await import('./phrases.json')
+    const registryModule = await import('./assessments/index.json')
+    return registryModule.default as AssessmentRegistry
+  } catch (error) {
+    console.error('Failed to load assessment registry:', error)
+    return getFallbackRegistry()
+  }
+}
+
+// Load specific assessment configuration by ID
+export async function loadAssessmentConfig(assessmentId?: string): Promise<AssessmentConfig> {
+  try {
+    // If no ID provided, use default
+    if (!assessmentId) {
+      const registry = await loadAssessmentRegistry()
+      assessmentId = registry.defaultAssessment
+    }
+
+    // Load the specific assessment config
+    const configModule = await import(`./assessments/${assessmentId}.json`)
     return configModule.default as AssessmentConfig
   } catch (error) {
-    console.error('Failed to load phrase configuration:', error)
+    console.error(`Failed to load assessment configuration for ${assessmentId}:`, error)
     // Return fallback configuration
     return getFallbackConfig()
+  }
+}
+
+// Backward compatibility function - loads default assessment
+export async function loadPhraseConfig(): Promise<AssessmentConfig> {
+  return loadAssessmentConfig()
+}
+
+// Fallback registry if loading fails
+function getFallbackRegistry(): AssessmentRegistry {
+  return {
+    assessments: [
+      {
+        id: "fallback",
+        name: "Basic Style Assessment",
+        shortDescription: "Simple fallback assessment",
+        version: "1.0.0-fallback",
+        isActive: true,
+        configFile: "fallback.json",
+        estimatedTime: "2-3 minutes",
+        questionCount: 4
+      }
+    ],
+    defaultAssessment: "fallback",
+    metadata: {
+      lastUpdated: new Date().toISOString().split('T')[0],
+      totalAssessments: 1,
+      version: "1.0.0-fallback"
+    }
   }
 }
 
 // Fallback configuration if JSON fails to load
 function getFallbackConfig(): AssessmentConfig {
   return {
+    id: "fallback",
+    name: "Basic Style Assessment",
+    shortDescription: "Simple fallback assessment",
     phraseSets: [
       {
         category: "Planning vs Flexibility",

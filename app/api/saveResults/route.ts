@@ -14,6 +14,7 @@ interface SaveResultsRequest {
   scores: AssessmentScore
   customCode?: string
   emailDomain?: string
+  assessmentId?: string
   timestamp: string
 }
 
@@ -45,6 +46,7 @@ export async function POST(request: NextRequest) {
 
     // Prepare database record
     const assessmentRecord = {
+      assessment_id: body.assessmentId || 'default',
       x_coordinate: body.scores.coordinates.x,
       y_coordinate: body.scores.coordinates.y,
       custom_code: body.customCode || undefined,
@@ -68,14 +70,14 @@ export async function POST(request: NextRequest) {
 
     console.log('Assessment result saved successfully:', {
       id: dbResult.id,
-      coordinates: body.scores.coordinates,
-      customCode: body.customCode,
-      emailDomain: processedEmailDomain
+      assessmentId: body.assessmentId || 'default',
+      coordinates: body.scores.coordinates
     })
     
     // Return success response
     const responseData = {
       id: dbResult.id,
+      assessmentId: body.assessmentId || 'default',
       totalQuestions: body.results.length,
       coordinates: body.scores.coordinates,
       completedAt: body.timestamp,

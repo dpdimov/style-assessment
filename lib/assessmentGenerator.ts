@@ -38,8 +38,10 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 // Generate random phrase pairs for assessment
-export async function generateAssessmentQuestions(numQuestions?: number): Promise<GeneratedQuestion[]> {
-  if (!configCache) {
+export async function generateAssessmentQuestions(config?: AssessmentConfig, numQuestions?: number): Promise<GeneratedQuestion[]> {
+  if (config) {
+    configCache = config
+  } else if (!configCache) {
     configCache = await loadPhraseConfig()
   }
   

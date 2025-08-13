@@ -54,6 +54,7 @@ After setting up the environment variables and deploying to Vercel, the database
 
 #### `assessment_results`
 - `id` (Serial Primary Key)
+- `assessment_id` (VARCHAR) - Assessment identifier/slug for different assessment types
 - `x_coordinate` (Decimal) - X axis result (-1 to 1)
 - `y_coordinate` (Decimal) - Y axis result (-1 to 1)  
 - `custom_code` (VARCHAR) - Custom group code for result grouping
@@ -67,29 +68,38 @@ After setting up the environment variables and deploying to Vercel, the database
 ### Views
 
 #### `assessment_analytics`
-Provides summary statistics grouped by custom_code and email_domain:
+Provides summary statistics grouped by assessment_id, custom_code and email_domain:
+- Assessment ID
 - Total assessments
 - Average coordinates
 - Date range of assessments
 
 ## Usage Examples
 
-### Query Results by Custom Code
+### Query Results by Assessment ID
 ```sql
 SELECT * FROM assessment_results 
-WHERE custom_code = 'COMPANY2024'
+WHERE assessment_id = 'leadership-v2'
+ORDER BY completed_at DESC;
+```
+
+### Query Results by Custom Code and Assessment
+```sql
+SELECT * FROM assessment_results 
+WHERE custom_code = 'COMPANY2024' AND assessment_id = 'leadership-v2'
 ORDER BY completed_at DESC;
 ```
 
 ### Get Analytics Summary
 ```sql
 SELECT * FROM assessment_analytics 
-WHERE custom_code = 'COMPANY2024';
+WHERE custom_code = 'COMPANY2024' AND assessment_id = 'leadership-v2';
 ```
 
 ### Export Results for Analysis
 ```sql
 SELECT 
+  assessment_id,
   custom_code,
   email_domain,
   x_coordinate,
@@ -98,7 +108,7 @@ SELECT
   completed_at
 FROM assessment_results
 WHERE completed_at >= '2024-01-01'
-ORDER BY completed_at DESC;
+ORDER BY assessment_id, completed_at DESC;
 ```
 
 ## Security Notes

@@ -7,9 +7,10 @@ import { loadPhraseConfig, getUIText, getResultsDisplayConfig } from '@/config/a
 interface ResultsDisplayProps {
   scores: AssessmentScore
   onReturnHome: () => void
+  onRetakeAssessment?: () => void
 }
 
-export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayProps) {
+export default function ResultsDisplay({ scores, onReturnHome, onRetakeAssessment }: ResultsDisplayProps) {
   const [interpretation, setInterpretation] = useState<any>(null)
   const [uiText, setUIText] = useState<any>(null)
   const [displayConfig, setDisplayConfig] = useState<any>(null)
@@ -162,12 +163,22 @@ export default function ResultsDisplay({ scores, onReturnHome }: ResultsDisplayP
             </div>
             
             
-            <button
-              onClick={onReturnHome}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
-            >
-              Take Assessment Again
-            </button>
+            <div className="space-y-3">
+              {onRetakeAssessment && (
+                <button
+                  onClick={onRetakeAssessment}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+                >
+                  Retake This Assessment
+                </button>
+              )}
+              <button
+                onClick={onReturnHome}
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+              >
+                Choose Different Assessment
+              </button>
+            </div>
           </div>
         </div>
       </div>

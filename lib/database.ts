@@ -2,6 +2,7 @@ import { sql } from '@vercel/postgres';
 
 export interface AssessmentResultRecord {
   id?: number;
+  assessment_id: string;
   x_coordinate: number;
   y_coordinate: number;
   custom_code?: string;
@@ -21,6 +22,7 @@ export class DatabaseService {
     try {
       const result = await sql`
         INSERT INTO assessment_results (
+          assessment_id,
           x_coordinate, 
           y_coordinate, 
           custom_code, 
@@ -31,6 +33,7 @@ export class DatabaseService {
           completed_at
         )
         VALUES (
+          ${data.assessment_id},
           ${data.x_coordinate}, 
           ${data.y_coordinate}, 
           ${data.custom_code || null}, 
@@ -58,13 +61,19 @@ export class DatabaseService {
   /**
    * Get assessment results by custom code for analytics
    */
-  static async getResultsByCustomCode(customCode: string): Promise<AssessmentResultRecord[]> {
+  static async getResultsByCustomCode(customCode: string, assessmentId?: string): Promise<AssessmentResultRecord[]> {
     try {
-      const result = await sql`
-        SELECT * FROM assessment_results 
-        WHERE custom_code = ${customCode}
-        ORDER BY completed_at DESC
-      `;
+      const result = assessmentId 
+        ? await sql`
+            SELECT * FROM assessment_results 
+            WHERE custom_code = ${customCode} AND assessment_id = ${assessmentId}
+            ORDER BY completed_at DESC
+          `
+        : await sql`
+            SELECT * FROM assessment_results 
+            WHERE custom_code = ${customCode}
+            ORDER BY completed_at DESC
+          `;
       
       return result.rows as AssessmentResultRecord[];
     } catch (error) {
@@ -76,22 +85,78 @@ export class DatabaseService {
   /**
    * Get analytics summary by custom code
    */
-  static async getAnalyticsByCustomCode(customCode: string) {
+  static async getAnalyticsByCustomCode(customCode: string, assessmentId?: string) {
     try {
-      const result = await sql`
-        SELECT 
-          COUNT(*) as total_assessments,
-          AVG(x_coordinate) as avg_x,
-          AVG(y_coordinate) as avg_y,
-          MIN(completed_at) as first_assessment,
-          MAX(completed_at) as last_assessment
-        FROM assessment_results 
-        WHERE custom_code = ${customCode}
-      `;
+      const result = assessmentId 
+        ? await sql`
+            SELECT 
+              COUNT(*) as total_assessments,
+              AVG(x_coordinate) as avg_x,
+              AVG(y_coordinate) as avg_y,
+              MIN(completed_at) as first_assessment,
+              MAX(completed_at) as last_assessment
+            FROM assessment_results 
+            WHERE custom_code = ${customCode} AND assessment_id = ${assessmentId}
+          `
+        : await sql`
+            SELECT 
+              COUNT(*) as total_assessments,
+              AVG(x_coordinate) as avg_x,
+              AVG(y_coordinate) as avg_y,
+              MIN(completed_at) as first_assessment,
+              MAX(completed_at) as last_assessment
+            FROM assessment_results 
+            WHERE custom_code = ${customCode}
+          `;
       
       return result.rows[0];
     } catch (error) {
       console.error('Database error fetching analytics:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Get all results for a specific assessment
+   */
+  static async getResultsByAssessmentId(assessmentId: string): Promise<AssessmentResultRecord[]> {
+    try {
+      const result = await sql`
+        SELECT * FROM assessment_results 
+        WHERE assessment_id = ${assessmentId}
+        ORDER BY completed_at DESC
+      `;
+      
+      return result.rows as AssessmentResultRecord[];
+    } catch (error) {
+      console.error('Database error fetching results by assessment ID:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Get analytics summary for a specific assessment
+   */
+  static async getAnalyticsByAssessmentId(assessmentId: string) {
+    try {
+      const result = await sql`
+        SELECT 
+          assessment_id,
+          COUNT(*) as total_assessments,
+          AVG(x_coordinate) as avg_x,
+          AVG(y_coordinate) as avg_y,
+          MIN(completed_at) as first_assessment,
+          MAX(completed_at) as last_assessment,
+          COUNT(DISTINCT custom_code) as unique_custom_codes,
+          COUNT(DISTINCT email_domain) as unique_domains
+        FROM assessment_results 
+        WHERE assessment_id = ${assessmentId}
+        GROUP BY assessment_id
+      `;
+      
+      return result.rows[0];
+    } catch (error) {
+      console.error('Database error fetching analytics by assessment ID:', error);
       return null;
     }
   }

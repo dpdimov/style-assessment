@@ -1,0 +1,195 @@
+{
+  "id": "kinetic-thinking",
+  "name": "Kinetic Thinking Style Assessment",
+  "shortDescription": "Discover how you engage with entrepreneurial situations",
+  "dimensions": [
+    {
+      "name": "Uncertainty Attitude",
+      "description": "How you approach new, uncertain situations",
+      "categories": ["Reason", "Play"]
+    },
+    {
+      "name": "Possibility Attitude", 
+      "description": "How you deal with new information",
+      "categories": ["Structure", "Openness"]
+    }
+  ],
+  "phraseSets": [
+    {
+      "category": "Reason",
+      "dimension": "Uncertainty Attitude",
+      "phrases": [
+        "Analyze it",
+        "Assess its potential",
+        "Consider its implications",
+        "Determine best place to start",
+        "Reason its feasibility",
+        "Review its benefits"
+      ]
+    },
+    {
+      "category": "Play",
+      "dimension": "Uncertainty Attitude", 
+      "phrases": [
+        "Draw it out",
+        "Experiment with its elements",
+        "Poke around with it",
+        "Play with it",
+        "Imagine its future",
+        "Toy with its possibilities"
+      ]
+    },
+    {
+      "category": "Structure",
+      "dimension": "Possibility Attitude",
+      "phrases": [
+        "Construct an explanation",
+        "Converge on facts that fit",
+        "Merge to bring together",
+        "Order the facts",
+        "Organise for relevance",
+        "Secure a foundation"
+      ]
+    },
+    {
+      "category": "Openness", 
+      "dimension": "Possibility Attitude",
+      "phrases": [
+        "Branch out into new ideas",
+        "Divide to take apart",
+        "Re-draw the boundaries",
+        "Imagine new potential",
+        "Improvise new possibilities",
+        "Stray into new territory"
+      ]
+    }
+  ],
+  "assessmentSettings": {
+    "defaultQuestionCount": 12,
+    "minQuestionCount": 8,
+    "maxQuestionCount": 12,
+    "allowDuplicatePhrases": false,
+    "pairingStrategy": "dimension-focused",
+    "ensureEqualDimensionCoverage": true
+  },
+  "styleDefinitions": {
+    "quadrant1": {
+      "name": "Breakaway",
+      "description": "When facing new ideas or situations, you tend to (1) consider options based on identified gaps and a sense of what is missing or what else is possible; and (2) deliberate action based on seeking new stimuli and setting things in motion for the sake of discovering something interesting. Your strength is in seeking new frontiers and painting a visionary future, and making sense of the situation. You would not be 'boxed' into structures or procedures and tend to focus on what they miss or prevent.",
+      "coordinates": { "x": "positive", "y": "positive" },
+      "traits": ["Provocative", "Exploratory", "Imaginative", "Visionary"]
+    },
+    "quadrant2": {
+      "name": "Incremental",
+      "description": "When facing new ideas or situations, you tend to (1) consider options based on identifying gaps and a sense of what is missing or what else is possible; and (2) deliberate action based on careful assessment of its merits and prospects. Your strength is in finding weakest links, areas for improvement, and immediate action steps. You are keen to close gaps, maintain a sense of movement, and define constant progress.", 
+      "coordinates": { "x": "negative", "y": "positive" },
+      "traits": ["Analytical", "Methodical", "Imaginative", "Pragmatic"]
+    },
+    "quadrant3": {
+      "name": "Focused",
+      "description": "When facing new ideas or situations, you tend to (1) consider options based on clearly defined goals or a sense of purpose; and (2) deliberate action based on careful assessment of its merits and prospects. Your strength is in organizing information and making sense of the situation. You are keen to determine and agree goals and develop benchmarks against which to evaluate options and assess progress.",
+      "coordinates": { "x": "negative", "y": "negative" },
+      "traits": ["Organized", "Analytical", "Methodical", "Efficient"]
+    },
+    "quadrant4": {
+      "name": "Playful", 
+      "description": "When facing new ideas or situations, you tend to (1) consider options based on clearly defined goals or sense of purpose; and (2) deliberate action based on seeking new stimuli and setting things in motion for the sake of discovering something interesting. Your strength is in provoking the world the respond, in putting things into play. You are keen to work with something tangible, to experiment, and to see where this takes you.",
+      "coordinates": { "x": "positive", "y": "negative" },
+      "traits": ["Provocative", "Exploratory", "Organized", "Methodical"]
+    },
+    "borderNorth": {
+      "name": "Kinetic within openness (Incremental and Breakaway)",
+      "description": "When facing new ideas or situations, you tend to consider options based on identifying gaps and a sense of what is missing or what else is possible. In deliberating action, you show flexibility between (1) a careful assessment of its merits and prospects, and (2) seeking new stimuli, setting things in motion to discover something interesting. Your strength is in identifying areas for improvement and seeking new frontiers. You are keen to close gaps, maintain a sense of movement, and define constant progress. You tend not be 'boxed' into structures or procedures and tend to focus on what they miss or prevent.",
+      "coordinates": { "x": "neutral", "y": "positive" },
+      "traits": ["Exploratory", "Imaginative", "Pragmatic", "Methodical"]
+    },
+    "borderSouth": {
+      "name": "Kinetic within structure (Focused and Playful)",
+      "description": "When facing new ideas or situations, you tend to consider options based on clearly defined goals or a sense of purpose. In deliberating action, you show flexibility between (1) a careful assessment of its merits and prospects, and (2) seeking new stimuli, setting things in motion to discover something interesting. Your strength is in organizing information and making sense of the situation. You are keen to determine and agree goals, but you are also comfortable to put things into play and see where this takes you.",
+      "coordinates": { "x": "neutral", "y": "negative" },
+      "traits": ["Organized", "Analytical", "Exploratory", "Provocative"]
+    },
+    "borderWest": {
+      "name": "Kinetic within reason (Focused and Incremental)",
+      "description": "When facing new ideas or situations, you show flexibility in considering options based on (1) clearly defined goals or a sense of purpose and (2) identifying gaps and a sense of what is missing or what else is possible. You deliberate action based on careful assessment of its merits and prospects. Your strength is in organizing information, making sense of the situation, and finding areas for improvement. You are keen to determine and agree goals as well as to keep moving and making progress.",
+      "coordinates": { "x": "negative", "y": "neutral" },
+      "traits": ["Organized", "Analytical", "Imaginative", "Pragmatic"]
+    },
+    "borderEast": {
+      "name": "Kinetic within play (Playful and Breakaway)",
+      "description": "When facing new ideas or situations, you show flexibility in considering options based on (1) clearly defined goals or a sense of purpose and (2) identifying gaps and a sense of what is missing or what else is possible. You deliberate action based on based on seeking new stimuli and setting things in motion for the sake of discovering something interesting. Your strength is in provoking the world the respond, in putting things into play, in seeking new frontiers and in painting a visionary future. You are keen to work with something tangible, to experiment, and to see where this takes you.",
+      "coordinates": { "x": "positive", "y": "neutral" },
+      "traits": ["Provocative", "Exploratory", "Imaginative", "Visionary"]
+    },
+    "center": {
+      "name": "Fully kinetic thinker",
+      "description": "When facing new ideas or situations, you show flexibility in considering options based on (1) clearly defined goals or a sense of purpose and (2) identifying gaps and a sense of what is missing or what else is possible. In deliberating action, you show flexibility between (1) a careful assessment of its merits and prospects, and (2) seeking new stimuli, setting things in motion to discover something interesting. You find strength and equal comfort in organizing information and agreeing goals, keeping on the move to make progress, seeking new frontiers, and experimenting with something tangible, to see where this takes you.",
+      "coordinates": { "x": "neutral", "y": "neutral" },
+      "traits": ["Analytical", "Provocative", "Pragmatic", "Visionary"]
+    }
+  },
+  "resultsDisplay": {
+    "backgroundImage": {
+      "enabled": true,
+      "url": "/images/assessment-background.png",
+      "opacity": 1.0,
+      "position": "center",
+      "size": "cover"
+    },
+    "plotSettings": {
+      "showGrid": true,
+      "gridColor": "#e5e7eb",
+      "borderColor": "#ffffff"
+    }
+  },
+  "uiText": {
+    "homePage": {
+      "title": "Kinetic Thinking Style Assessment",
+      "subtitle": "Discover how you tend to engage with entrepreneurial situations. How do you respond when you need to step off the beaten path?",
+      "whatYoullLearn": {
+        "heading": "What You'll Learn:",
+        "items": [
+          "Your preferred thinking style",
+          "Meta-cognitive awareness", 
+          "New language for thinking",
+          "Insight to do things differently"
+        ]
+      },
+      "assessmentDetails": {
+        "heading": "Assessment Details:",
+        "items": [
+          "Takes 3-5 minutes to complete",
+          "12 randomized question pairs, in two parts",
+          "Instant results and insights",
+          "Remember: There are no right or wrong answers!"
+        ]
+      },
+      "buttons": {
+        "startAssessment": "Start Assessment",
+        "processing": "Processing...",
+        "viewResults": "View Your Results"
+      },
+      "footer": "Your privacy is important to us. All assessment data is securely processed and stored."
+    },
+    "assessment": {
+      "title": "Kinetic Style Assessment",
+      "partIntros": {
+        "part1": "When engaging with new ideas, how do you tend to move forward?",
+        "part2": "When encountering new information, how do you tend to process it?"
+      },
+      "instructions": "Use the slider or click the bars above to select a response that reflects your hunch"
+    },
+    "auth": {
+      "welcomeBack": "Welcome back,",
+      "logout": "Logout"
+    }
+  },
+  "metadata": {
+    "version": "2.0.0",
+    "lastUpdated": "2024-01-01",
+    "totalPhrases": 24,
+    "categories": 4,
+    "dimensions": 2,
+    "description": "Two-dimensional kinetic thinking style assessment with 4 focused categories"
+  }
+}

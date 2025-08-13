@@ -3,6 +3,7 @@
 
 CREATE TABLE assessment_results (
   id SERIAL PRIMARY KEY,
+  assessment_id VARCHAR(100) NOT NULL DEFAULT 'default',
   x_coordinate DECIMAL(10, 8) NOT NULL,
   y_coordinate DECIMAL(10, 8) NOT NULL,
   custom_code VARCHAR(50),
@@ -15,13 +16,16 @@ CREATE TABLE assessment_results (
 );
 
 -- Add indexes for better query performance
+CREATE INDEX idx_assessment_id ON assessment_results(assessment_id);
 CREATE INDEX idx_custom_code ON assessment_results(custom_code);
 CREATE INDEX idx_email_domain ON assessment_results(email_domain);
 CREATE INDEX idx_completed_at ON assessment_results(completed_at);
+CREATE INDEX idx_assessment_custom ON assessment_results(assessment_id, custom_code);
 
 -- Optional: Create a view for easy analytics
 CREATE VIEW assessment_analytics AS
 SELECT 
+  assessment_id,
   custom_code,
   email_domain,
   COUNT(*) as total_assessments,
@@ -31,5 +35,5 @@ SELECT
   MAX(completed_at) as last_assessment
 FROM assessment_results
 WHERE custom_code IS NOT NULL
-GROUP BY custom_code, email_domain
+GROUP BY assessment_id, custom_code, email_domain
 ORDER BY total_assessments DESC;

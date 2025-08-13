@@ -106,9 +106,10 @@ function getPhraseCategory(phrase: string, config: AssessmentConfig): string | n
 // Calculate final assessment scores
 export async function calculateAssessmentScores(
   questions: GeneratedQuestion[],
-  responses: { questionId: string; value: number }[]
+  responses: { questionId: string; value: number }[],
+  config?: AssessmentConfig
 ): Promise<AssessmentScore> {
-  const config = await loadPhraseConfig()
+  const assessmentConfig = config || await loadPhraseConfig()
   const scoringResponses: ScoringResponse[] = []
   
   // Process each response
@@ -120,7 +121,7 @@ export async function calculateAssessmentScores(
       response.value,
       question.leftPhrase,
       question.rightPhrase,
-      config
+      assessmentConfig
     )
     
     scoringResponses.push({
@@ -136,13 +137,13 @@ export async function calculateAssessmentScores(
   }
   
   // Calculate category scores
-  const categoryScores = calculateCategoryScores(scoringResponses, config)
+  const categoryScores = calculateCategoryScores(scoringResponses, assessmentConfig)
   
   // Calculate dimension scores
-  const dimensionScores = calculateDimensionScores(categoryScores, config)
+  const dimensionScores = calculateDimensionScores(categoryScores, assessmentConfig)
   
   // Calculate X/Y coordinates for 2D mapping
-  const coordinates = calculateCoordinates(dimensionScores, config)
+  const coordinates = calculateCoordinates(dimensionScores, assessmentConfig)
   
   return {
     categoryScores,

@@ -7,7 +7,8 @@ import LoginModal from '@/components/LoginModal'
 import { getStoredAuth, clearStoredAuth, User } from '@/lib/auth'
 import { generateAssessmentQuestions, GeneratedQuestion } from '@/lib/assessmentGenerator'
 import { AssessmentScore } from '@/lib/scoringEngine'
-import { loadPhraseConfig, getUIText } from '@/config/assessmentConfig'
+import { loadPhraseConfig, loadAssessmentConfig, getUIText, AssessmentConfig } from '@/config/assessmentConfig'
+import AssessmentSelection from '@/components/AssessmentSelection'
 
 // Use the GeneratedQuestion interface from the generator
 type AssessmentQuestion = GeneratedQuestion
@@ -20,6 +21,8 @@ interface AssessmentResult {
 }
 
 export default function Home() {
+  const [showAssessmentSelection, setShowAssessmentSelection] = useState<boolean>(true)
+  const [selectedAssessmentId, setSelectedAssessmentId] = useState<string>('')
   const [showAssessment, setShowAssessment] = useState<boolean>(false)
   const [showResults, setShowResults] = useState<boolean>(false)
   const [results, setResults] = useState<AssessmentResult[] | null>(null)
@@ -30,6 +33,7 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [assessmentQuestions, setAssessmentQuestions] = useState<AssessmentQuestion[]>([])
   const [uiText, setUIText] = useState<any>(null)
+  const [assessmentConfig, setAssessmentConfig] = useState<AssessmentConfig | null>(null)
   const [customCode, setCustomCode] = useState<string>('')
   const [emailDomain, setEmailDomain] = useState<string>('')
 
@@ -37,12 +41,17 @@ export default function Home() {
     const authState = getStoredAuth()
     setIsAuthenticated(authState.isAuthenticated)
     setUser(authState.user)
-    
-    // Load UI text from configuration
-    loadPhraseConfig().then(config => {
-      setUIText(getUIText(config))
-    })
   }, [])
+
+  const handleAssessmentSelected = async (assessmentId: string) => {
+    setSelectedAssessmentId(assessmentId)
+    setShowAssessmentSelection(false)
+    
+    // Load the specific assessment configuration
+    const config = await loadAssessmentConfig(assessmentId)
+    setAssessmentConfig(config)
+    setUIText(getUIText(config))
+  }
 
   const handleStartAssessment = async () => {
     // Temporarily disable authentication for testing
@@ -53,9 +62,9 @@ export default function Home() {
     
     setIsLoading(true)
     try {
-      // Generate new random questions for this assessment
-      // Number of questions will be determined by the configuration
-      const newQuestions = await generateAssessmentQuestions()
+      // Generate new random questions for this assessment using the selected config
+      const config = await loadAssessmentConfig(selectedAssessmentId)
+      const newQuestions = await generateAssessmentQuestions(config)
       setAssessmentQuestions(newQuestions)
       setShowAssessment(true)
       setResults(null)
@@ -83,10 +92,28 @@ export default function Home() {
   }
 
   const handleReturnHome = () => {
+    // Reset all states to return to assessment selection
+    setShowResults(false)
+    setShowAssessment(false)
+    setShowAssessmentSelection(true)
+    setResults(null)
+    setAssessmentScores(null)
+    setSelectedAssessmentId('')
+    setAssessmentConfig(null)
+    setAssessmentQuestions([])
+    setUIText(null)
+    setCustomCode('')
+    setEmailDomain('')
+  }
+
+  const handleRetakeAssessment = () => {
+    // Reset only results to retake the same assessment
     setShowResults(false)
     setShowAssessment(false)
     setResults(null)
     setAssessmentScores(null)
+    // Keep the same assessment config and restart
+    handleStartAssessment()
   }
 
   const handleAssessmentComplete = async (
@@ -107,19 +134,21 @@ export default function Home() {
           scores: scores,
           customCode: customCode.trim() || null,
           emailDomain: emailDomain.trim() || null,
+          assessmentId: selectedAssessmentId,
           timestamp: new Date().toISOString()
         })
       })
-
+      
       if (response.ok) {
         const data = await response.json()
         setResults(assessmentResults)
         setAssessmentScores(scores)
         setShowAssessment(false)
         setShowResults(true) // Show results directly
-        console.log('Assessment completed with scores:', scores)
+        console.log('Assessment completed successfully')
       } else {
-        console.error('Failed to save results')
+        const errorText = await response.text()
+        console.error('Failed to save results:', response.status, errorText)
       }
     } catch (error) {
       console.error('Error saving results:', error)
@@ -138,17 +167,24 @@ export default function Home() {
       <ResultsDisplay
         scores={assessmentScores}
         onReturnHome={handleReturnHome}
+        onRetakeAssessment={handleRetakeAssessment}
       />
     )
   }
 
-  if (showAssessment && assessmentQuestions.length > 0) {
+  if (showAssessment && assessmentQuestions.length > 0 && assessmentConfig) {
     return (
       <Assessment
         questions={assessmentQuestions}
+        config={assessmentConfig}
         onComplete={handleAssessmentComplete}
       />
     )
+  }
+
+  // Show assessment selection screen first
+  if (showAssessmentSelection) {
+    return <AssessmentSelection onAssessmentSelected={handleAssessmentSelected} />
   }
 
   // Show loading until UI text is loaded
