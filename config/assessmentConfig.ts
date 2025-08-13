@@ -145,8 +145,12 @@ export const DEFAULT_SETTINGS: AssessmentSettings = {
 // Load assessment registry
 export async function loadAssessmentRegistry(): Promise<AssessmentRegistry> {
   try {
-    const registryModule = await import('./assessments/index.json')
-    return registryModule.default as AssessmentRegistry
+    const response = await fetch('/config/assessments/index.json')
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    const registry = await response.json() as AssessmentRegistry
+    return registry
   } catch (error) {
     console.error('Failed to load assessment registry:', error)
     return getFallbackRegistry()
@@ -162,9 +166,12 @@ export async function loadAssessmentConfig(assessmentId?: string): Promise<Asses
       assessmentId = registry.defaultAssessment
     }
 
-    // Load the specific assessment config
-    const configModule = await import(`./assessments/${assessmentId}.json`)
-    return configModule.default as AssessmentConfig
+    const response = await fetch(`/config/assessments/${assessmentId}.json`)
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    const config = await response.json() as AssessmentConfig
+    return config
   } catch (error) {
     console.error(`Failed to load assessment configuration for ${assessmentId}:`, error)
     // Return fallback configuration

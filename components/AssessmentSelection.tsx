@@ -17,6 +17,9 @@ export default function AssessmentSelection({ onAssessmentSelected }: Assessment
       setRegistry(data)
       setSelectedAssessment(data.defaultAssessment)
       setLoading(false)
+    }).catch(error => {
+      console.error('Failed to load registry:', error)
+      setLoading(false)
     })
   }, [])
 
