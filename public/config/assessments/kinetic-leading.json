@@ -1,0 +1,195 @@
+{
+  "id": "kinetic-leading",
+  "name": "Kinetic Leading Style Assessment",
+  "shortDescription": "Discover how you lead entrepreneurial organizations",
+  "dimensions": [
+    {
+      "name": "Ecosystem Attitude",
+      "description": "How you deal with other stakeholders",
+      "categories": ["Transact", "Collaborate"]
+    },
+    {
+      "name": "Time Attitude", 
+      "description": "How you orient the organization",
+      "categories": ["Present", "Future"]
+    }
+  ],
+  "phraseSets": [
+    {
+      "category": "Transact",
+      "dimension": "Ecosystem Attitude",
+      "phrases": [
+        "Making deals",
+        "Enforcing boundaries",
+        "Making unilateral decisions",
+        "Defending our interests",
+        "Taking a reactive stance",
+        "Exercising autonomy"
+      ]
+    },
+    {
+      "category": "Collaborate",
+      "dimension": "Ecosystem Attitude", 
+      "phrases": [
+        "Building relationships",
+        "Lowering barriers",
+        "Making collective decisions",
+        "Defining common interests",
+        "Taking a proactive stance",
+        "Balancing peer interests"
+      ]
+    },
+    {
+      "category": "Present",
+      "dimension": "Time Attitude",
+      "phrases": [
+        "Enhancing near-term performance",
+        "Exploiting existing skills",
+        "Refining mastery",
+        "Avoiding mistakes",
+        "Managing the present",
+        "Maximising present value"
+      ]
+    },
+    {
+      "category": "Future", 
+      "dimension": "Time Attitude",
+      "phrases": [
+        "Building long-term competitivenesss",
+        "Developing new capabilities",
+        "Embracing learning",
+        "Leveraging mistakes",
+        "Creating the future",
+        "Investing in future value"
+      ]
+    }
+  ],
+  "assessmentSettings": {
+    "defaultQuestionCount": 12,
+    "minQuestionCount": 8,
+    "maxQuestionCount": 12,
+    "allowDuplicatePhrases": false,
+    "pairingStrategy": "dimension-focused",
+    "ensureEqualDimensionCoverage": true
+  },
+  "styleDefinitions": {
+    "quadrant1": {
+      "name": "Transformer",
+      "description": "In leading entrepreneurial organisations, you tend to (1) focus on future value opportunities and long-term competitiveness; and (2) embed the organisation in the broader community of stakeholders. Your strength is in guiding the organization to develop new capabilities. You are keen to reach out across boundaries and work towards the common interests of the ecosystem.",
+      "coordinates": { "x": "positive", "y": "positive" },
+      "traits": ["System thinker", "Community focused", "Future oriented", "Capability builder"]
+    },
+    "quadrant2": {
+      "name": "Challenger",
+      "description": "When facing new ideas or situations, you tend to (1) consider options based on identifying gaps and a sense of what is missing or what else is possible; and (2) deliberate action based on careful assessment of its merits and prospects. Your strength is in finding weakest links, areas for improvement, and immediate action steps. You are keen to close gaps, maintain a sense of movement, and define constant progress.", 
+      "coordinates": { "x": "negative", "y": "positive" },
+      "traits": ["Competitive", "Protective", "Future oriented", "Capability builder"]
+    },
+    "quadrant3": {
+      "name": "Troubleshooter",
+      "description": "In leading entrepreneurial organisations, you tend to (1) focus on present value and near-term performance; and (2) consider the interests and competitive position of the organisation. Your strength is in energising the organisation to leverage existing capabilities. You are keen to define and enforce the specific strategic space in which the organisation operates.",
+      "coordinates": { "x": "negative", "y": "negative" },
+      "traits": ["Competitive", "Protective", "Present oriented", "Leveraging strengths"]
+    },
+    "quadrant4": {
+      "name": "Co-creator", 
+      "description": "In leading entrepreneurial organisations, you tend to (1) focus on present value and near-term performance; and (2) embed the organisation in the broader community of stakeholders. Your strength is in energizing the organisation to leverage existing capabilities. You are keen to reach out across boundaries and work towards the common interests of the ecosystem.",
+      "coordinates": { "x": "positive", "y": "negative" },
+      "traits": ["System thinker", "Community focused", "Present oriented", "Leveraging strengths"]
+    },
+    "borderNorth": {
+      "name": "Kinetic within future (Challenger and Transformer)",
+      "description": "In leading entrepreneurial organisations, you tend to focus on future value opportunities and long-term competitiveness. In positioning your organisation, you show flexibility between (1) considering its interests and competitive position, and (2) embedding it in the broader community of stakeholders. Your strength is in guiding the organisation to develop new capabilities. You are keen to define and enforce the specific strategic space in which the organisation operates, as well as to reach out across boundaries and work towards the common interests of the ecosystem.",
+      "coordinates": { "x": "neutral", "y": "positive" },
+      "traits": ["Competitive", "System thinker", "Future oriented", "Capability builder"]
+    },
+    "borderSouth": {
+      "name": "Kinetic within present (Troubleshooter and Co-creator)",
+      "description": "In leading entrepreneurial organisations, you tend to focus on present value and near-term performance. In positioning your organisation, you show flexibility between (1) considering its interests and competitive position, and (2) embedding it in the broader community of stakeholders. Your strength is in energising the organisation to leverage existing capabilities. You are keen to define and enforce the specific strategic space in which the organisation operates, as well as to reach out across boundaries and work towards the common interests of the ecosystem.",
+      "coordinates": { "x": "neutral", "y": "negative" },
+      "traits": ["Competitive", "System thinker", "Present oriented", "Leveraging strenghts"]
+    },
+    "borderWest": {
+      "name": "Kinetic within transact (Troubleshooter and Challenger)",
+      "description": "In leading entrepreneurial organisations, you show flexibility in focusing on (1) present value and near-term performance and (2) future value opportunities and long-term competitiveness. You consider the interests and competitive position of the organisation. Your strength is in energising the organisation to leverage existing capabilities as well as guiding the organisation to develop new capabilities. You are keen to define and enforce the specific strategic space in which the organisation operates.",
+      "coordinates": { "x": "negative", "y": "neutral" },
+      "traits": ["Competitive", "Protective", "Leveraging strengths", "Capability builder"]
+    },
+    "borderEast": {
+      "name": "Kinetic within collaborate (Playful and Breakaway)",
+      "description": "In leading entrepreneurial organisations, you show flexibility in focusing on (1) present value and near-term performance and (2) future value opportunities and long-term competitiveness. You embed the organisation in the broader community of stakeholders. Your strength is in energizing the organisation to leverage existing capabilities as well as guiding the organisation to develop new capabilities. You are keen to reach out across boundaries and work towards the common interests of the ecosystem.",
+      "coordinates": { "x": "positive", "y": "neutral" },
+      "traits": ["System thinker", "Community focused", "Leveraging strengths", "Capability builder"]
+    },
+    "center": {
+      "name": "Fully kinetic leader",
+      "description": "In leading entrepreneurial organisations, you show flexibility in focusing on (1) present value and near-term performance and (2) future value opportunities and long-term competitiveness. In positioning your organisation, you show flexibility between (1) considering its interests and competitive position, and (2) embedding it in the broader community of stakeholders. You find strength and equal comfort in energising the organization to leverage existing capabilities as well as guiding the organisation to develop new capabilities. You are keen to define and enforce the specific strategic space in which the organisation operates, as well as to reach out across boundaries and work towards the common interests of the ecosystem.",
+      "coordinates": { "x": "neutral", "y": "neutral" },
+      "traits": ["Competitive", "System thinker", "Leveraging strenghts", "Capability builder"]
+    }
+  },
+  "resultsDisplay": {
+    "backgroundImage": {
+      "enabled": true,
+      "url": "/images/kinetic-leading-background.png",
+      "opacity": 1.0,
+      "position": "center",
+      "size": "cover"
+    },
+    "plotSettings": {
+      "showGrid": true,
+      "gridColor": "#e5e7eb",
+      "borderColor": "#ffffff"
+    }
+  },
+  "uiText": {
+    "homePage": {
+      "title": "Kinetic Leading Style Assessment",
+      "subtitle": "Discover how you tend to lead entrepreneurial organizations. How do you respond when you need to move into new territories or ways of working?",
+      "whatYoullLearn": {
+        "heading": "What You'll Learn:",
+        "items": [
+          "Your preferred leading style",
+          "Meta-cognitive awareness", 
+          "New language for leading",
+          "Insight to do things differently"
+        ]
+      },
+      "assessmentDetails": {
+        "heading": "Assessment Details:",
+        "items": [
+          "Takes 3-5 minutes to complete",
+          "12 randomized question pairs, in two parts",
+          "Instant results and insights",
+          "Remember: There are no right or wrong answers!"
+        ]
+      },
+      "buttons": {
+        "startAssessment": "Start Assessment",
+        "processing": "Processing...",
+        "viewResults": "View Your Results"
+      },
+      "footer": "Your privacy is important to us. All assessment data is securely processed and stored."
+    },
+    "assessment": {
+      "title": "Kinetic Leading Style Assessment",
+      "partIntros": {
+        "part1": "When leading entrepreneurial organizations, how do you tend to set time horizons?",
+        "part2": "When leading entrepreneurial organizations, how do you tend to engage with the broader ecosystem?"
+      },
+      "instructions": "Use the slider or click the bars above to select a response that reflects your hunch"
+    },
+    "auth": {
+      "welcomeBack": "Welcome back,",
+      "logout": "Logout"
+    }
+  },
+  "metadata": {
+    "version": "2.0.0",
+    "lastUpdated": "2024-01-01",
+    "totalPhrases": 24,
+    "categories": 4,
+    "dimensions": 2,
+    "description": "Two-dimensional kinetic leading style assessment with 4 focused categories"
+  }
+}

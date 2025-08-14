@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { AssessmentScore, interpretCoordinates } from '@/lib/scoringEngine'
-import { loadPhraseConfig, getUIText, getResultsDisplayConfig } from '@/config/assessmentConfig'
+import { loadAssessmentConfig, getUIText, getResultsDisplayConfig } from '@/config/assessmentConfig'
 
 interface ResultsDisplayProps {
   scores: AssessmentScore
@@ -20,10 +20,10 @@ export default function ResultsDisplay({ scores, onReturnHome, onRetakeAssessmen
   useEffect(() => {
     const loadResults = async () => {
       try {
-        const config = await loadPhraseConfig()
+        const config = await loadAssessmentConfig(scores.assessmentId)
         const ui = getUIText(config)
         const display = getResultsDisplayConfig(config)
-        const result = await interpretCoordinates(scores.coordinates)
+        const result = await interpretCoordinates(scores.coordinates, config)
         
         setInterpretation(result)
         setUIText(ui)

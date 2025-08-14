@@ -20,6 +20,7 @@ export interface DimensionScore {
 }
 
 export interface AssessmentScore {
+  assessmentId: string
   categoryScores: CategoryScore[]
   dimensionScores: DimensionScore[]
   coordinates: {
@@ -146,6 +147,7 @@ export async function calculateAssessmentScores(
   const coordinates = calculateCoordinates(dimensionScores, assessmentConfig)
   
   return {
+    assessmentId: assessmentConfig.id,
     categoryScores,
     dimensionScores,
     coordinates,
@@ -264,14 +266,14 @@ function calculateCoordinates(
     return { x: 0, y: 0 }
   }
   
-  // Find the two dimensions from the actual config
-  const dimension1 = dimensionScores.find(d => d.dimension === "Uncertainty Attitude")
-  const dimension2 = dimensionScores.find(d => d.dimension === "Possibility Attitude")
+  // Use the first two dimensions from the config (order matters for X/Y mapping)
+  const dimension1 = dimensionScores.find(d => d.dimension === config.dimensions[0].name)
+  const dimension2 = dimensionScores.find(d => d.dimension === config.dimensions[1].name)
   
-  // X-axis: Uncertainty Attitude (-1 = Reason, +1 = Play)
+  // X-axis: First dimension 
   const x = dimension1?.dimensionBalance || 0
   
-  // Y-axis: Possibility Attitude (-1 = Structure, +1 = Openness)  
+  // Y-axis: Second dimension
   const y = dimension2?.dimensionBalance || 0
   
   return { x, y }
@@ -304,13 +306,16 @@ export function interpretDimensionScore(dimensionScore: DimensionScore): {
 }
 
 // Interpret coordinates as style (9 possible positions)
-export async function interpretCoordinates(coordinates: { x: number; y: number }): Promise<{
+export async function interpretCoordinates(
+  coordinates: { x: number; y: number }, 
+  config?: AssessmentConfig
+): Promise<{
   position: string
   style: string
   description: string
   traits: string[]
 }> {
-  const config = await loadPhraseConfig()
+  const assessmentConfig = config || await loadPhraseConfig()
   const { x, y } = coordinates
   
   // Define thresholds for neutral zones (adjust as needed)
@@ -354,7 +359,7 @@ export async function interpretCoordinates(coordinates: { x: number; y: number }
   }
   
   // Get style info from configuration, with fallbacks
-  const styleDefinitions = getStyleDefinitions(config)
+  const styleDefinitions = getStyleDefinitions(assessmentConfig)
   const styleInfo = styleDefinitions?.[styleKey as keyof typeof styleDefinitions]
   
   const style = styleInfo?.name || `${position} Style`

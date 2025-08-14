@@ -85,6 +85,7 @@ export default function Assessment({ questions, config, onComplete }: Assessment
         console.error('Error calculating scores:', error)
         // Fallback - still complete but without detailed scores
         onComplete(newResults, {
+          assessmentId: config.id,
           categoryScores: [],
           dimensionScores: [],
           coordinates: { x: 0, y: 0 },

@@ -131,7 +131,7 @@
   "resultsDisplay": {
     "backgroundImage": {
       "enabled": true,
-      "url": "/images/assessment-background.png",
+      "url": "/images/kinetic-thinking-background.png",
       "opacity": 1.0,
       "position": "center",
       "size": "cover"
@@ -172,7 +172,7 @@
       "footer": "Your privacy is important to us. All assessment data is securely processed and stored."
     },
     "assessment": {
-      "title": "Kinetic Style Assessment",
+      "title": "Kinetic Thinking Style Assessment",
       "partIntros": {
         "part1": "When engaging with new ideas, how do you tend to move forward?",
         "part2": "When encountering new information, how do you tend to process it?"

@@ -1,0 +1,195 @@
+{
+  "id": "kinetic-managing",
+  "name": "Kinetic Managing Style Assessment",
+  "shortDescription": "Discover how you manage entrepreneurial projects",
+  "dimensions": [
+    {
+      "name": "Process Attitude",
+      "description": "How you oversee team processes",
+      "categories": ["Control", "Enable"]
+    },
+    {
+      "name": "Performance Attitude", 
+      "description": "How you set team priorities",
+      "categories": ["Productivity", "Learning"]
+    }
+  ],
+  "phraseSets": [
+    {
+      "category": "Control",
+      "dimension": "Process Attitude",
+      "phrases": [
+        "Developing checklists",
+        "Refining procedures",
+        "Tracking progress",
+        "Improving reporting",
+        "Producing role descriptions",
+        "Formalising structures"
+      ]
+    },
+    {
+      "category": "Enable",
+      "dimension": "Process Attitude", 
+      "phrases": [
+        "Evaluating development needs",
+        "Discussing challenges",
+        "Holding personal meetings",
+        "Developing relationships",
+        "Delegating responsibility",
+        "Increasing motivation"
+      ]
+    },
+    {
+      "category": "Productivity",
+      "dimension": "Performance Attitude",
+      "phrases": [
+        "Improving efficiency",
+        "Delivering results",
+        "Optimising resources",
+        "Minimising discrepancies",
+        "Achieving targets",
+        "Reducing complaints"
+      ]
+    },
+    {
+      "category": "Learning", 
+      "dimension": "Performance Attitude",
+      "phrases": [
+        "Experimenting with new forms",
+        "Identifying unknowns",
+        "Investigating new uses",
+        "Testing assumptions",
+        "Trying new approaches",
+        "Meeting new customers"
+      ]
+    }
+  ],
+  "assessmentSettings": {
+    "defaultQuestionCount": 12,
+    "minQuestionCount": 8,
+    "maxQuestionCount": 12,
+    "allowDuplicatePhrases": false,
+    "pairingStrategy": "dimension-focused",
+    "ensureEqualDimensionCoverage": true
+  },
+  "styleDefinitions": {
+    "quadrant1": {
+      "name": "Venturing",
+      "description": "When facing new ideas or situations, you tend to (1) set priorities based on identifying unknowns and testing assumptions; and (2) oversee processes by delegating responsibility and enabling personal development. Your strength is in trying new approaches and exploring new possibilities. You are keen to promote autonomy and task ownership.",
+      "coordinates": { "x": "positive", "y": "positive" },
+      "traits": ["Developmental", "Inspiring", "Curious", "Intellectually humble"]
+    },
+    "quadrant2": {
+      "name": "Inquisitive",
+      "description": "When managing entrepreneurial projects, you tend to (1) set priorities based on identifying unknowns and testing assumptions; and (2) oversee processes by setting and enforcing rules or procedures. Your strength is in trying new approaches and exploring new possibilities. You are keen to develop checklists and track progress.", 
+      "coordinates": { "x": "negative", "y": "positive" },
+      "traits": ["Systematic", "Organized", "Curious", "Intellectually humble"]
+    },
+    "quadrant3": {
+      "name": "Efficient",
+      "description": "When managing entrepreneurial projects, you tend to (1) set priorities based on specific targets and measurable results; and (2) oversee processes by setting and enforcing rules or procedures. Your strength is in optimizing resources and delivering results. You are keen to develop checklists and track progress.",
+      "coordinates": { "x": "negative", "y": "negative" },
+      "traits": ["Systematic", "Organized", "Results oriented", "Optimizing"]
+    },
+    "quadrant4": {
+      "name": "Supportive", 
+      "description": "When facing new ideas or situations, you tend to (1) set priorities based on specific targets and measurable results; and (2) oversee processes by delegating responsibility and enabling personal development. Your strength is in optimizing resources and delivering results. You are keen to promote autonomy and task ownership.",
+      "coordinates": { "x": "positive", "y": "negative" },
+      "traits": ["Developmental", "Inspiring", "Results oriented", "Optimizing"]
+    },
+    "borderNorth": {
+      "name": "Kinetic within learning (Inquisitive and Venturing)",
+      "description": "When managing entrepreneurial projects, you tend to set priorities based on identifying unknowns and testing assumptions. In overseeing processes, you show flexibility between (1) setting and enforcing rules or procedures and (2) delegating responsibility and enabling personal development. Your strength is in trying new approaches and exploring new possibilities. You are keen to develop checklists and track progress, while also promoting autonomy and task ownership.",
+      "coordinates": { "x": "neutral", "y": "positive" },
+      "traits": ["Organized", "Developmental", "Curious", "Intellectually humble"]
+    },
+    "borderSouth": {
+      "name": "Kinetic within productivity (Efficient and Supportive)",
+      "description": "When facing new ideas or situations, you tend to consider options based on clearly defined goals or a sense of purpose. In deliberating action, you show flexibility between (1) a careful assessment of its merits and prospects, and (2) seeking new stimuli, setting things in motion to discover something interesting. Your strength is in organizing information and making sense of the situation. You are keen to determine and agree goals, but you are also comfortable to put things into play and see where this takes you.",
+      "coordinates": { "x": "neutral", "y": "negative" },
+      "traits": ["Organized", "Developmental", "Results oriented", "Optimizing"]
+    },
+    "borderWest": {
+      "name": "Kinetic within control (Efficient and Inquisitive)",
+      "description": "When managing entrepreneurial projects, you show flexibility in setting priorities based on (1) specific targets and measurable results and (2) identifying unknowns and testing assumptions. You oversee processes by setting and enforcing rules or procedures. Your strength is in optimizing resources and delivering results as well as in trying new approaches and exploring new possibilities.&nbsp; You are keen to develop checklists and track progress.",
+      "coordinates": { "x": "negative", "y": "neutral" },
+      "traits": ["Systematic", "Organized", "Results oriented", "Intellectually humble"]
+    },
+    "borderEast": {
+      "name": "Kinetic within enable (Supportive and Venturing)",
+      "description": "When managing entrepreneurial projects, you show flexibility in setting priorities based on (1) specific targets and measurable results and (2) identifying unknowns and testing assumptions. You oversee processes by delegating responsibility and enabling personal development. Your strength is in optimizing resources and delivering results as well as in trying new approaches and exploring new possibilities. You are keen to promote autonomy and task ownership.",
+      "coordinates": { "x": "positive", "y": "neutral" },
+      "traits": ["Developmental", "Inspiring", "Results oriented", "Intellectually humble"]
+    },
+    "center": {
+      "name": "Fully kinetic manager",
+      "description": "When managing entrepreneurial projects, you show flexibility in setting priorities based on (1) specific targets and measurable results and (2) identifying unknowns and testing assumptions. In overseeing processes, you show flexibility between (1) setting and enforcing rules or procedures and (2) delegating responsibility and enabling personal development. Your strength is in optimizing resources and delivering results as well as in trying new approaches and exploring new possibilities. You are keen to develop checklists and track progress, while also promoting autonomy and task ownership.",
+      "coordinates": { "x": "neutral", "y": "neutral" },
+      "traits": ["Organized", "Developmental", "Results oriented", "Intellectually humble"]
+    }
+  },
+  "resultsDisplay": {
+    "backgroundImage": {
+      "enabled": true,
+      "url": "/images/kinetic-managing-background.png",
+      "opacity": 1.0,
+      "position": "center",
+      "size": "cover"
+    },
+    "plotSettings": {
+      "showGrid": true,
+      "gridColor": "#e5e7eb",
+      "borderColor": "#ffffff"
+    }
+  },
+  "uiText": {
+    "homePage": {
+      "title": "Kinetic Managing Style Assessment",
+      "subtitle": "Discover how you tend to lead entrepreneurial projects. How do you manage others when developing new products, services or ways of working?",
+      "whatYoullLearn": {
+        "heading": "What You'll Learn:",
+        "items": [
+          "Your preferred managing style",
+          "Meta-cognitive awareness", 
+          "New language for managing",
+          "Insight to do things differently"
+        ]
+      },
+      "assessmentDetails": {
+        "heading": "Assessment Details:",
+        "items": [
+          "Takes 3-5 minutes to complete",
+          "12 randomized question pairs, in two parts",
+          "Instant results and insights",
+          "Remember: There are no right or wrong answers!"
+        ]
+      },
+      "buttons": {
+        "startAssessment": "Start Assessment",
+        "processing": "Processing...",
+        "viewResults": "View Your Results"
+      },
+      "footer": "Your privacy is important to us. All assessment data is securely processed and stored."
+    },
+    "assessment": {
+      "title": "Kinetic Managing Style Assessment",
+      "partIntros": {
+        "part1": "When managing entrepreneurial projects, how do you tend to oversee processes?",
+        "part2": "When managing entrepreneurial projects, how do you tend to set priorities?"
+      },
+      "instructions": "Use the slider or click the bars above to select a response that reflects your hunch"
+    },
+    "auth": {
+      "welcomeBack": "Welcome back,",
+      "logout": "Logout"
+    }
+  },
+  "metadata": {
+    "version": "2.0.0",
+    "lastUpdated": "2024-01-01",
+    "totalPhrases": 24,
+    "categories": 4,
+    "dimensions": 2,
+    "description": "Two-dimensional kinetic managing style assessment with 4 focused categories"
+  }
+}

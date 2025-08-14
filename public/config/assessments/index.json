@@ -9,12 +9,32 @@
       "configFile": "kinetic-thinking.json",
       "estimatedTime": "3-5 minutes",
       "questionCount": 12
+    },
+    {
+      "id": "kinetic-managing",
+      "name": "Kinetic Managing Style Assessment",
+      "shortDescription": "Discover how you manage entrepreneurial projects",
+      "version": "2.0.0",
+      "isActive": true,
+      "configFile": "kinetic-managing.json",
+      "estimatedTime": "3-5 minutes",
+      "questionCount": 12
+    },
+    {
+      "id": "kinetic-leading",
+      "name": "Kinetic Leading Style Assessment",
+      "shortDescription": "Discover how you lead entrepreneurial organizations",
+      "version": "2.0.0",
+      "isActive": true,
+      "configFile": "kinetic-leading.json",
+      "estimatedTime": "3-5 minutes",
+      "questionCount": 12
     }
   ],
   "defaultAssessment": "kinetic-thinking",
   "metadata": {
     "lastUpdated": "2024-01-01",
-    "totalAssessments": 1,
+    "totalAssessments": 3,
     "version": "1.0.0"
   }
 }
