@@ -267,8 +267,8 @@ function calculateCoordinates(
   }
   
   // Use the first two dimensions from the config (order matters for X/Y mapping)
-  const dimension1 = dimensionScores.find(d => d.dimension === config.dimensions[0].name)
-  const dimension2 = dimensionScores.find(d => d.dimension === config.dimensions[1].name)
+  const dimension1 = dimensionScores.find(d => d.dimension === config.dimensions![0].name)
+  const dimension2 = dimensionScores.find(d => d.dimension === config.dimensions![1].name)
   
   // X-axis: First dimension 
   const x = dimension1?.dimensionBalance || 0
